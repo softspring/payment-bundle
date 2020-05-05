@@ -1,0 +1,44 @@
+{
+    "name": "softspring/payment-bundle",
+    "description": "This bundle provides payment features.",
+    "license": "MIT",
+    "require": {
+        "php": "^7.1",
+        "softspring/crudl-bundle": "^1.0.1",
+        "softspring/customer-bundle": "^1.1@dev",
+        "softspring/doctrine-templates": "^1.0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Softspring\\PaymentBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "/tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Softspring\\PaymentBundle\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "conflict": {
+        "stripe/stripe-php": "<6.40.0"
+    },
+    "suggest": {
+        "softspring/admin-bundle": "Use softspring admin templates",
+        "softspring/core-bundle": "Use softspring core bundle",
+        "stripe/stripe-php": "Add Stripe php client library if you want to set stripe as driver"
+    },
+    "require-dev": {
+        "symfony/http-kernel": "^5.0",
+        "symfony/dependency-injection": "^5.0",
+        "phpunit/phpunit": "^9.1",
+        "doctrine/common": "^2.12",
+        "stripe/stripe-php": "^7.31"
+    }
+}
