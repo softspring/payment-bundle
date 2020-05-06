@@ -1,0 +1,5 @@
+security:
+    role_hierarchy:
+        ROLE_PAYMENT_ADMIN_PAYMENTS:
+            - ROLE_PAYMENT_ADMIN_PAYMENT_LIST
+            - ROLE_PAYMENT_ADMIN_PAYMENT_DETAILS

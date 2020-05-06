@@ -1,0 +1,34 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\PaymentBundle\Form\Admin\PaymentListFilterFormInterface:
+        class: 'Softspring\PaymentBundle\Form\Admin\PaymentListFilterForm'
+
+    sfs_payment.admin.payment.controller:
+        class: Softspring\CrudlBundle\Controller\CrudlController
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $manager: '@Softspring\PaymentBundle\Manager\PaymentManagerInterface'
+            $listFilterForm: '@Softspring\PaymentBundle\Form\Admin\PaymentListFilterFormInterface'
+            $createForm: null
+            $updateForm: null
+            $deleteForm: null
+            $config:
+                entity_attribute: 'payment'
+                list:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_PAYMENT_LIST'
+                    filter_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_LIST_FILTER
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_LIST_VIEW
+                    view: '@@SfsPayment/admin/payment/list.html.twig'
+                    view_page: '@@SfsPayment/admin/payment/list-page.html.twig'
+                    read_route: 'sfs_payment_admin_payments_read'
+                read:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_PAYMENT_DETAILS'
+                    param_converter_key: 'id'
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_READ_VIEW
+                    view: '@@SfsPayment/admin/payment/read.html.twig'

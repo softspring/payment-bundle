@@ -1,0 +1,24 @@
+payment:
+    status:
+        values:
+            1: 'Pendiente'
+            2: 'Finalizado'
+            3: 'Fallido'
+
+admin_payments:
+    list:
+        page_title: "Pagos"
+        fields:
+            customer.header: "Cliente"
+            source.header: "Origen"
+            status.header: "Estado"
+            type.header: "Tipo"
+            date.header: "Fecha"
+            amount.header: "Importe"
+        actions:
+            details.button: "detalles"
+        filter_form:
+            status.label: "Estado"
+            actions.search: "Buscar"
+    read:
+        page_title: "Detalles del pago"

@@ -1,0 +1,24 @@
+payment:
+    status:
+        values:
+            1: 'Pending'
+            2: 'Done'
+            3: 'Failed'
+
+admin_payments:
+    list:
+        page_title: "Payments"
+        fields:
+            customer.header: "Customer"
+            source.header: "Source"
+            status.header: "Status"
+            type.header: "Type"
+            date.header: "Date"
+            amount.header: "Amount"
+        actions:
+            details.button: "details"
+        filter_form:
+            status.label: "Status"
+            actions.search: "Search"
+    read:
+        page_title: "Payment details"
