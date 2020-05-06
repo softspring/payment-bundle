@@ -45,7 +45,7 @@ abstract class Payment implements PaymentInterface
     /**
      * @var string|null
      */
-    protected $description;
+    protected $concept;
 
     /**
      * @return CustomerInterface|null
@@ -132,7 +132,7 @@ abstract class Payment implements PaymentInterface
      */
     public function getDate(): ?\DateTime
     {
-        return \DateTime::createFromFormat('U', $this->date);
+        return $this->date ? \DateTime::createFromFormat('U', $this->date) : null;
     }
 
     /**
@@ -178,16 +178,16 @@ abstract class Payment implements PaymentInterface
     /**
      * @return string|null
      */
-    public function getDescription(): ?string
+    public function getConcept(): ?string
     {
-        return $this->description;
+        return $this->concept;
     }
 
     /**
-     * @param string|null $description
+     * @param string|null $concept
      */
-    public function setDescription(?string $description): void
+    public function setConcept(?string $concept): void
     {
-        $this->description = $description;
+        $this->concept = $concept;
     }
 }

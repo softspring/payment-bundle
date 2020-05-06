@@ -39,7 +39,7 @@
             </options>
         </field>
 
-        <field name="description" column="description" type="string" nullable="true" />
+        <field name="concept" column="concept" type="string" nullable="true" />
     </mapped-superclass>
 
 </doctrine-mapping>

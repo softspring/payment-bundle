@@ -45,7 +45,7 @@ interface PaymentInterface extends PlatformObjectInterface
 
     public function setCurrency(?string $currency): void;
 
-    public function getDescription(): ?string;
+    public function getConcept(): ?string;
 
-    public function setDescription(?string $description): void;
+    public function setConcept(?string $concept): void;
 }
