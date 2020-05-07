@@ -1,0 +1,34 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\PaymentBundle\Form\Admin\InvoiceListFilterFormInterface:
+        class: 'Softspring\PaymentBundle\Form\Admin\InvoiceListFilterForm'
+
+    sfs_payment.admin.invoice.controller:
+        class: Softspring\CrudlBundle\Controller\CrudlController
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $manager: '@Softspring\PaymentBundle\Manager\InvoiceManagerInterface'
+            $listFilterForm: '@Softspring\PaymentBundle\Form\Admin\InvoiceListFilterFormInterface'
+            $createForm: null
+            $updateForm: null
+            $deleteForm: null
+            $config:
+                entity_attribute: 'invoice'
+                list:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_INVOICE_LIST'
+                    filter_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_LIST_FILTER
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_LIST_VIEW
+                    view: '@@SfsPayment/admin/invoice/list.html.twig'
+                    view_page: '@@SfsPayment/admin/invoice/list-page.html.twig'
+                    read_route: 'sfs_payment_admin_invoices_read'
+                read:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_INVOICE_DETAILS'
+                    param_converter_key: 'id'
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_READ_VIEW
+                    view: '@@SfsPayment/admin/invoice/read.html.twig'

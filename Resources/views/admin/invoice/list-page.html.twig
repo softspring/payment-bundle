@@ -1,0 +1,18 @@
+{% trans_default_domain 'sfs_payment' %}
+
+{% for invoice in entities %}
+    <tr>
+        <td>{{ invoice.date ? invoice.date|date('d-m-Y') : '' }}</td>
+        <td class="{{ {35:'text-muted', 15:'text-success', 21:'text-warning'}[invoice.status] | default('') }}">
+            {{ invoice.statusString }}
+        </td>
+        <td>{{ invoice.customer.name|default('') }}</td>
+        <td>{{ invoice.concept }}</td>
+
+        <td>{{ invoice.amount|number_format(2) }} <small>{{ invoice.currency }}</small></td>
+
+        {% if read_route %}
+            <td><a href="{{ url(read_route, {'invoice':invoice}) }}" class="text-nowrap">{{ 'admin_invoices.list.actions.details.button'|trans }}   <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a></td>
+        {% endif %}
+    </tr>
+{% endfor %}

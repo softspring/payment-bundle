@@ -1,0 +1,7 @@
+sfs_payment_admin_invoices_list:
+    controller: sfs_payment.admin.invoice.controller::list
+    path: /
+
+sfs_payment_admin_invoices_read:
+    controller: sfs_payment.admin.invoice.controller::read
+    path: /{payment}

@@ -36,6 +36,7 @@ class SfsPaymentExtension extends Extension
 
         $loader->load('services.yaml');
         $loader->load('controller/admin_payments.yaml');
+        $loader->load('controller/admin_invoices.yaml');
         $loader->load('manager/concept.yaml');
         $loader->load('manager/invoice.yaml');
         $loader->load('manager/payment.yaml');
