@@ -2,12 +2,13 @@
 
 {% for payment in entities %}
     <tr>
-        <td>{{ payment.customer.name|default('') }}</td>
-{#        <td>{{ payment.source.name|default('') }}</td>#}
+        <td>{{ payment.date ? payment.date|date('d-m-Y') : '' }}</td>
         <td class="{{ {35:'text-muted', 15:'text-success', 21:'text-warning'}[payment.status] | default('') }}">
             {{ payment.statusString }}
         </td>
-        <td>{{ payment.date ? payment.date|date('d-m-Y') : '' }}</td>
+        <td>{{ payment.customer.name|default('') }}</td>
+        <td>{{ payment.concept }}</td>
+
         <td>{{ payment.amount|number_format(2) }} <small>{{ payment.currency }}</small></td>
 
         {% if read_route %}

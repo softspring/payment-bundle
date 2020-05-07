@@ -14,5 +14,6 @@
         <li><strong>Source:</strong> {{ payment.source.platformId }}</li>
         <li><strong>Status:</strong> {{ payment.statusString }}</li>
         <li><strong>Date:</strong> {{ payment.date|date('H:i:s d-m-Y') }}</li>
+        <li><strong>Concept:</strong> {{ payment.concept }}</li>
     </ul>
 {% endblock content %}

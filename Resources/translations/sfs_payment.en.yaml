@@ -10,7 +10,7 @@ admin_payments:
         page_title: "Payments"
         fields:
             customer.header: "Customer"
-            source.header: "Source"
+            concept.header: "Concept"
             status.header: "Status"
             type.header: "Type"
             date.header: "Date"

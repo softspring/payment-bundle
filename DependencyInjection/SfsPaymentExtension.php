@@ -21,6 +21,8 @@ class SfsPaymentExtension extends Extension
 
         $container->setParameter('sfs_payment.entity_manager_name', $config['entity_manager']);
 
+        $container->setParameter('sfs_payment.concept.class', $config['model']['concept']);
+        $container->setParameter('sfs_payment.invoice.class', $config['model']['invoice']);
         $container->setParameter('sfs_payment.payment.class', $config['model']['payment']);
 
         // load services
@@ -34,6 +36,8 @@ class SfsPaymentExtension extends Extension
 
         $loader->load('services.yaml');
         $loader->load('controller/admin_payments.yaml');
+        $loader->load('manager/concept.yaml');
+        $loader->load('manager/invoice.yaml');
         $loader->load('manager/payment.yaml');
     }
 }

@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $em: '@sfs_payment.entity_manager'
+
+    Softspring\PaymentBundle\Manager\ConceptManagerInterface:
+        class: Softspring\CrudlBundle\Manager\DefaultCrudlEntityManager
+        arguments:
+            $targetClass: 'Softspring\PaymentBundle\Model\ConceptInterface'

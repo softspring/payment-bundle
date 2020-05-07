@@ -32,6 +32,8 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('model')
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('concept')->defaultValue('App\Entity\Concept')->end()
+                        ->scalarNode('invoice')->defaultValue('App\Entity\Invoice')->end()
                         ->scalarNode('payment')->defaultValue('App\Entity\Payment')->end()
                     ->end()
                 ->end()

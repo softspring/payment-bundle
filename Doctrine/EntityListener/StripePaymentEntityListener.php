@@ -4,9 +4,9 @@ namespace Softspring\PaymentBundle\Doctrine\EntityListener;
 
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Softspring\CustomerBundle\Platform\Exception\NotFoundInPlatform;
 use Softspring\PaymentBundle\Model\PaymentInterface;
 use Softspring\PaymentBundle\Platform\Adapter\PaymentAdapterInterface;
-use Softspring\PaymentBundle\Platform\Exception\NotFoundInPlatform;
 
 class StripePaymentEntityListener
 {
@@ -43,7 +43,7 @@ class StripePaymentEntityListener
         if (!$payment->getPlatformId()) {
             $this->paymentAdapter->create($payment);
         } else {
-            $this->paymentAdapter->update($payment);
+            // $this->paymentAdapter->update($payment);
         }
     }
 
@@ -55,7 +55,7 @@ class StripePaymentEntityListener
     {
         if ($payment->getPlatformId()) {
             try {
-                $this->paymentAdapter->delete($payment);
+                // $this->paymentAdapter->delete($payment);
             } catch (NotFoundInPlatform $e) {
                 // nothing to do, it's already deleted
             }

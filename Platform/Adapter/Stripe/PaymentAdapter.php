@@ -99,6 +99,11 @@ class PaymentAdapter extends AbstractStripeAdapter implements PaymentAdapterInte
                     'amount' => (int) ($payment->getAmount() * 100),
                     'currency' => $payment->getCurrency(),
                 ];
+
+                if ($payment->getConcept()) {
+                    $data['charge']['description'] = $payment->getConcept();
+                }
+
                 break;
 
             case PaymentInterface::TYPE_REFUND:
@@ -124,6 +129,7 @@ class PaymentAdapter extends AbstractStripeAdapter implements PaymentAdapterInte
         if ($paymentStripe instanceof Charge) {
             $payment->setStatus(self::MAPPING_STATUSES[$paymentStripe->status]);
             $payment->setDate(\DateTime::createFromFormat('U', $paymentStripe->created));
+            $payment->setConcept($paymentStripe->description);
         }
 
         if ($paymentStripe instanceof Refund) {

@@ -22,10 +22,10 @@
     {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities} %}
         {% trans_default_domain 'sfs_payment' %}
         {% block ths %}
-            <th scope="col">{{ 'admin_payments.list.fields.customer.header'|trans }}</th>
-{#            <th scope="col">{{ 'admin_payments.list.fields.source.header'|trans }}</th>#}
-            <th scope="col">{{ 'admin_payments.list.fields.status.header'|trans }}</th>
             <th scope="col">{{ 'admin_payments.list.fields.date.header'|trans }}</th>
+            <th scope="col">{{ 'admin_payments.list.fields.status.header'|trans }}</th>
+            <th scope="col">{{ 'admin_payments.list.fields.customer.header'|trans }}</th>
+            <th scope="col">{{ 'admin_payments.list.fields.concept.header'|trans }}</th>
             <th scope="col">{{ 'admin_payments.list.fields.amount.header'|trans }}</th>
             {% if read_route %}
                 <th>&nbsp;</th>

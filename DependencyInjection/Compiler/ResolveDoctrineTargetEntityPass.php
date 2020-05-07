@@ -4,6 +4,8 @@ namespace Softspring\PaymentBundle\DependencyInjection\Compiler;
 
 use Doctrine\ORM\Mapping\MappingException;
 use Softspring\CoreBundle\DependencyInjection\Compiler\AbstractResolveDoctrineTargetEntityPass;
+use Softspring\PaymentBundle\Model\ConceptInterface;
+use Softspring\PaymentBundle\Model\InvoiceInterface;
 use Softspring\PaymentBundle\Model\PaymentInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -25,6 +27,8 @@ class ResolveDoctrineTargetEntityPass extends AbstractResolveDoctrineTargetEntit
      */
     public function process(ContainerBuilder $container)
     {
+        $this->setTargetEntityFromParameter('sfs_payment.concept.class', ConceptInterface::class, $container, true);
+        $this->setTargetEntityFromParameter('sfs_payment.invoice.class', InvoiceInterface::class, $container, true);
         $this->setTargetEntityFromParameter('sfs_payment.payment.class', PaymentInterface::class, $container, true);
     }
 }

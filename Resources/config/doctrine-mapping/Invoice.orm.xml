@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                      https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Softspring\PaymentBundle\Model\Invoice" table="invoice">
+        <many-to-one field="customer" target-entity="Softspring\CustomerBundle\Model\CustomerInterface" inversed-by="payments">
+            <join-column name="customer_id" referenced-column-name="id" on-delete="SET NULL" />
+        </many-to-one>
+
+        <field name="status" column="status" type="integer" nullable="true">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
+
+        <!--one-to-many field="concepts" target-entity="Softspring\PaymentBundle\Model\Concept" mapped-by="invoice" /-->
+        <!--one-to-many field="payments" target-entity="Softspring\PaymentBundle\Model\Payment" /-->
+
+        <field name="date" column="payment_date" type="integer" nullable="true">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
+
+        <field name="subTotal" column="sub_total" type="decimal" nullable="true" precision="10" scale="2" />
+        <field name="taxes" column="taxes" type="decimal" nullable="true" precision="10" scale="2" />
+        <field name="total" column="total" type="decimal" nullable="true" precision="10" scale="2" />
+
+        <field name="currency" column="currency" type="string" nullable="true" length="3">
+            <options>
+                <option name="fixed">true</option>
+            </options>
+        </field>
+    </mapped-superclass>
+
+</doctrine-mapping>
