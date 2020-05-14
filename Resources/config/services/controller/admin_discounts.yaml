@@ -1,0 +1,49 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\PaymentBundle\Form\Admin\DiscountCreateFormInterface:
+        class: 'Softspring\PaymentBundle\Form\Admin\DiscountCreateForm'
+
+    Softspring\PaymentBundle\Form\Admin\DiscountListFilterFormInterface:
+        class: 'Softspring\PaymentBundle\Form\Admin\DiscountListFilterForm'
+
+    Softspring\PaymentBundle\EventListener\Admin\DiscountListener:
+        tags: ['kernel.event_subscriber']
+
+    sfs_payment.admin.discount.controller:
+        class: Softspring\CrudlBundle\Controller\CrudlController
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $manager: '@Softspring\PaymentBundle\Manager\DiscountManagerInterface'
+            $listFilterForm: '@Softspring\PaymentBundle\Form\Admin\DiscountListFilterFormInterface'
+            $createForm: '@Softspring\PaymentBundle\Form\Admin\DiscountCreateFormInterface'
+            $updateForm: null
+            $deleteForm: null
+            $config:
+                entity_attribute: 'discount'
+                list:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_DISCOUNT_LIST'
+                    filter_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_DISCOUNTS_LIST_FILTER
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_DISCOUNTS_LIST_VIEW
+                    view: '@@SfsPayment/admin/discount/list.html.twig'
+                    view_page: '@@SfsPayment/admin/discount/list-page.html.twig'
+                    read_route: 'sfs_payment_admin_discounts_read'
+                read:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_DISCOUNT_DETAILS'
+                    param_converter_key: 'id'
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_DISCOUNTS_READ_VIEW
+                    view: '@@SfsPayment/admin/discount/read.html.twig'
+                create:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_DISCOUNT_CREATE'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_DISCOUNTS_CREATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_DISCOUNTS_CREATE_FORM_VALID
+                    success_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_DISCOUNTS_CREATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_DISCOUNTS_CREATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_DISCOUNTS_CREATE_VIEW
+                    view: '@@SfsPayment/admin/discount/create.html.twig'

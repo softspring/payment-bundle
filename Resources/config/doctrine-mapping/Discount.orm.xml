@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                      https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Softspring\PaymentBundle\Model\Discount" table="discount">
+        <field name="name" column="name" type="string" nullable="true" />
+        <field name="type" column="type" type="smallint" nullable="true"><options><option name="unsigned">true</option></options></field>
+        <field name="due" column="due" type="smallint" nullable="true"><options><option name="unsigned">true</option></options></field>
+        <field name="currency" column="currency" type="string" nullable="true" length="3"><options><option name="fixed">true</option></options></field>
+        <field name="value" column="value" type="decimal" nullable="true" precision="10" scale="2" />
+    </mapped-superclass>
+
+</doctrine-mapping>

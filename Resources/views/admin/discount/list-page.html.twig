@@ -1,0 +1,26 @@
+{% trans_default_domain 'sfs_payment' %}
+
+{% for discount in entities %}
+    <tr>
+        <td>{{ discount.name|default('') }}</td>
+        <td>{{ discount.type }}</td>
+        <td>{{ discount.due }}</td>
+
+        <td>
+            {{ discount.value|number_format(2) }}
+            {% if discount.type == constant('Softspring\\PaymentBundle\\Model\\DiscountInterface::TYPE_FIXED_AMOUNT') %}
+                <small>{{ discount.currency }}</small>
+            {% else %}
+                %
+            {% endif %}
+        </td>
+
+        {% if read_route %}
+            <td>
+                <a href="{{ url(read_route, {'discount':discount}) }}" class="text-nowrap">
+{#                    {{ 'admin_discount.list.actions.details.button'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span>#}
+                </a>
+            </td>
+        {% endif %}
+    </tr>
+{% endfor %}

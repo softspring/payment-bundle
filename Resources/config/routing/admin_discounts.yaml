@@ -1,0 +1,11 @@
+sfs_payment_admin_discounts_list:
+    controller: sfs_payment.admin.discount.controller::list
+    path: /
+
+sfs_payment_admin_discounts_create:
+    controller: sfs_payment.admin.discount.controller::create
+    path: /create
+
+sfs_payment_admin_discounts_read:
+    controller: sfs_payment.admin.discount.controller::read
+    path: /{discount}

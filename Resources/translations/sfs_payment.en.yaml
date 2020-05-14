@@ -91,3 +91,25 @@ admin_concept:
         actions:
             cancel.button: "Cancel"
             create.button: "Create"
+
+admin_discount:
+    breadcrumb: "Discount"
+
+    list:
+        page_title: "Discounts"
+        fields:
+            name.header: "Name"
+            type.header: "Type"
+            due.header: "Dues"
+            value.header: "Value"
+
+    create:
+        meta.title: "New discount"
+        breadcrumb: "New discount"
+        title: "New discount"
+        form:
+            currency.label: "Currency"
+        actions:
+            cancel.button: "Cancel"
+            create.button: "Create"
+

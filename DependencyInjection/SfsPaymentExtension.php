@@ -22,13 +22,12 @@ class SfsPaymentExtension extends Extension
         $container->setParameter('sfs_payment.entity_manager_name', $config['entity_manager']);
 
         $container->setParameter('sfs_payment.concept.class', $config['model']['concept']);
+        $container->setParameter('sfs_payment.discount.class', $config['model']['discount']);
         $container->setParameter('sfs_payment.invoice.class', $config['model']['invoice']);
         $container->setParameter('sfs_payment.payment.class', $config['model']['payment']);
 
         // load services
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
-
-        $container->setParameter('sfs_payment.adapter.name', $config['adapter']['driver']);
 
         $loader->load('controller/admin_payments.yaml');
         $loader->load('controller/admin_concepts.yaml');
@@ -36,5 +35,10 @@ class SfsPaymentExtension extends Extension
         $loader->load('manager/concept.yaml');
         $loader->load('manager/invoice.yaml');
         $loader->load('manager/payment.yaml');
+
+        if (!empty($config['model']['discount'])) {
+            $loader->load('controller/admin_discounts.yaml');
+            $loader->load('manager/discount.yaml');
+        }
     }
 }
