@@ -30,12 +30,8 @@ class SfsPaymentExtension extends Extension
 
         $container->setParameter('sfs_payment.adapter.name', $config['adapter']['driver']);
 
-        if ($config['adapter']['driver'] == 'stripe') {
-            $loader->load('adapter/stripe.yaml');
-        }
-
-        $loader->load('services.yaml');
         $loader->load('controller/admin_payments.yaml');
+        $loader->load('controller/admin_concepts.yaml');
         $loader->load('controller/admin_invoices.yaml');
         $loader->load('manager/concept.yaml');
         $loader->load('manager/invoice.yaml');

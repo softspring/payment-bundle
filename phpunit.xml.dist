@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="./tests/bootstrap.php" colors="true">
+<phpunit bootstrap="./Tests/bootstrap.php" colors="true">
 
     <testsuites>
         <testsuite name="SfsPaymentBundle test suite">
-            <directory suffix="Test.php">./tests</directory>
+            <directory suffix="Test.php">./Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -13,7 +13,7 @@
             <directory>./</directory>
             <exclude>
                 <directory>./Resources</directory>
-                <directory>./tests</directory>
+                <directory>./Tests</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>

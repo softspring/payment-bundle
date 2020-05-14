@@ -4,6 +4,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.1",
+        "ext-json": "*",
         "softspring/crudl-bundle": "^1.0.1",
         "softspring/customer-bundle": "^1.1@dev",
         "softspring/doctrine-templates": "^1.0.4"
@@ -18,12 +19,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Softspring\\PaymentBundle\\Tests\\": "tests/"
+            "Softspring\\PaymentBundle\\Tests\\": "Tests/"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     },
     "conflict": {
@@ -32,7 +33,8 @@
     "suggest": {
         "softspring/admin-bundle": "Use softspring admin templates",
         "softspring/core-bundle": "Use softspring core bundle",
-        "stripe/stripe-php": "Add Stripe php client library if you want to set stripe as driver"
+        "softspring/platform-bundle": "Integrate external platforms",
+        "softspring/stripe-platform": "Integrate stripe platform"
     },
     "require-dev": {
         "symfony/http-kernel": "^5.0",
