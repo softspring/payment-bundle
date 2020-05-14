@@ -21,4 +21,6 @@
             <li><strong>Source:</strong> {{ payment.source.alias|default('') }} - {{ payment.source.platformData.brand|default('') }} {{ payment.source.platformData.last4|default(false) ? '****************'~payment.source.platformData.last4 : '' }}</li>
         {% endif %}
     </ul>
+
+    {% include '@SfsPlatform/platform_data.html.twig' with {'platformObject': payment} %}
 {% endblock content %}
