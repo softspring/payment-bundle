@@ -2,8 +2,15 @@
 
 namespace Softspring\PaymentBundle\Model;
 
+use Softspring\CustomerBundle\Model\CustomerInterface;
+
 abstract class Concept implements ConceptInterface
 {
+    /**
+     * @var CustomerInterface|null
+     */
+    protected $customer;
+
     /**
      * @var InvoiceInterface|null
      */
@@ -22,7 +29,7 @@ abstract class Concept implements ConceptInterface
     /**
      * @var int|null
      */
-    protected $quantity;
+    protected $quantity = 1;
 
     /**
      * @var float|null
@@ -33,6 +40,22 @@ abstract class Concept implements ConceptInterface
      * @var string|null
      */
     protected $currency;
+
+    /**
+     * @return CustomerInterface|null
+     */
+    public function getCustomer(): ?CustomerInterface
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param CustomerInterface|null $customer
+     */
+    public function setCustomer(?CustomerInterface $customer): void
+    {
+        $this->customer = $customer;
+    }
 
     /**
      * @return InvoiceInterface|null
@@ -80,6 +103,7 @@ abstract class Concept implements ConceptInterface
     public function setPrice(?float $price): void
     {
         $this->price = $price;
+        $this->setTotal($this->getPrice() * $this->getQuantity());
     }
 
     /**
@@ -96,6 +120,7 @@ abstract class Concept implements ConceptInterface
     public function setQuantity(?int $quantity): void
     {
         $this->quantity = $quantity;
+        $this->setTotal($this->getPrice() * $this->getQuantity());
     }
 
     /**

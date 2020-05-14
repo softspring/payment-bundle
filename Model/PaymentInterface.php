@@ -3,10 +3,9 @@
 namespace Softspring\PaymentBundle\Model;
 
 use Softspring\CustomerBundle\Model\CustomerInterface;
-use Softspring\CustomerBundle\Model\PlatformObjectInterface;
 use Softspring\CustomerBundle\Model\SourceInterface;
 
-interface PaymentInterface extends PlatformObjectInterface
+interface PaymentInterface
 {
     const STATUS_PENDING = 1;
     const STATUS_DONE = 2;
@@ -48,4 +47,8 @@ interface PaymentInterface extends PlatformObjectInterface
     public function getConcept(): ?string;
 
     public function setConcept(?string $concept): void;
+
+    public function getRefundPayment(): ?PaymentInterface;
+
+    public function setRefundPayment(?PaymentInterface $payment): void;
 }

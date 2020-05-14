@@ -19,7 +19,7 @@ class PaymentListFilterForm extends EntityListFilterForm implements PaymentListF
 
         $resolver->setDefaults([
             'translation_domain' => 'sfs_payment',
-            'label_format' => 'admin_payments.list.filter_form.%name%.label',
+            'label_format' => 'admin_payment.list.filter_form.%name%.label',
         ]);
     }
 
@@ -29,15 +29,16 @@ class PaymentListFilterForm extends EntityListFilterForm implements PaymentListF
 
         $builder->add('status', ChoiceType::class, [
             'required' => false,
+            'choice_translation_domain' => 'sfs_payment',
             'choices' => [
-                'pending' => PaymentInterface::STATUS_PENDING,
-                'done' => PaymentInterface::STATUS_DONE,
-                'failed' => PaymentInterface::STATUS_FAILED,
+                'payment.status_string.pending' => PaymentInterface::STATUS_PENDING,
+                'payment.status_string.done' => PaymentInterface::STATUS_DONE,
+                'payment.status_string.failed' => PaymentInterface::STATUS_FAILED,
             ]
         ]);
 
         $builder->add('submit', SubmitType::class, [
-            'label' => 'admin_payments.list.filter_form.actions.search'
+            'label' => 'admin_payment.list.filter_form.actions.search'
         ]);
     }
 

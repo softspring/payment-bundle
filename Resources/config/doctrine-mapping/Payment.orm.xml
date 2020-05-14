@@ -40,6 +40,11 @@
         </field>
 
         <field name="concept" column="concept" type="string" nullable="true" />
+
+
+        <many-to-one field="refundPayment" target-entity="Softspring\PaymentBundle\Model\PaymentInterface">
+            <join-column name="refund_payment_id" referenced-column-name="id" on-delete="SET NULL" />
+        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

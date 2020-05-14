@@ -4,8 +4,14 @@ services:
         autoconfigure: true
         public: false
 
+    Softspring\PaymentBundle\Form\Admin\InvoiceCreateFormInterface:
+        class: 'Softspring\PaymentBundle\Form\Admin\InvoiceCreateForm'
+
     Softspring\PaymentBundle\Form\Admin\InvoiceListFilterFormInterface:
         class: 'Softspring\PaymentBundle\Form\Admin\InvoiceListFilterForm'
+
+    Softspring\PaymentBundle\EventListener\Admin\InvoiceListener:
+        tags: ['kernel.event_subscriber']
 
     sfs_payment.admin.invoice.controller:
         class: Softspring\CrudlBundle\Controller\CrudlController
@@ -15,7 +21,7 @@ services:
         arguments:
             $manager: '@Softspring\PaymentBundle\Manager\InvoiceManagerInterface'
             $listFilterForm: '@Softspring\PaymentBundle\Form\Admin\InvoiceListFilterFormInterface'
-            $createForm: null
+            $createForm: '@Softspring\PaymentBundle\Form\Admin\InvoiceCreateFormInterface'
             $updateForm: null
             $deleteForm: null
             $config:
@@ -32,3 +38,12 @@ services:
                     param_converter_key: 'id'
                     view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_READ_VIEW
                     view: '@@SfsPayment/admin/invoice/read.html.twig'
+                create:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_INVOICE_CREATE'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_CREATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_CREATE_FORM_VALID
+                    success_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_CREATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_CREATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_CREATE_VIEW
+                    view: '@@SfsPayment/admin/invoice/create.html.twig'

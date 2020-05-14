@@ -7,6 +7,6 @@ services:
             $em: '@sfs_payment.entity_manager'
 
     Softspring\PaymentBundle\Manager\ConceptManagerInterface:
-        class: Softspring\CrudlBundle\Manager\DefaultCrudlEntityManager
+        class: Softspring\PaymentBundle\Manager\ConceptManager
         arguments:
             $targetClass: 'Softspring\PaymentBundle\Model\ConceptInterface'

@@ -48,6 +48,11 @@ abstract class Payment implements PaymentInterface
     protected $concept;
 
     /**
+     * @var PaymentInterface|null
+     */
+    protected $refundPayment;
+
+    /**
      * @return CustomerInterface|null
      */
     public function getCustomer(): ?CustomerInterface
@@ -189,5 +194,21 @@ abstract class Payment implements PaymentInterface
     public function setConcept(?string $concept): void
     {
         $this->concept = $concept;
+    }
+
+    /**
+     * @return PaymentInterface|null
+     */
+    public function getRefundPayment(): ?PaymentInterface
+    {
+        return $this->refundPayment;
+    }
+
+    /**
+     * @param PaymentInterface|null $refundPayment
+     */
+    public function setRefundPayment(?PaymentInterface $refundPayment): void
+    {
+        $this->refundPayment = $refundPayment;
     }
 }

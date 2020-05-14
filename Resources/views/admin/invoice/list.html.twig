@@ -1,6 +1,6 @@
 {% trans_default_domain 'sfs_payment' %}
 {% extends '@SfsPayment/admin_layout.html.twig' %}
-{% block title %}{{ 'admin_invoices.list.page_title'|trans }}{% endblock %}
+{% block title %}{{ 'admin_invoice.list.page_title'|trans }}{% endblock %}
 
 {% form_theme filterForm 'bootstrap_4_horizontal_layout.html.twig' %}
 
@@ -12,6 +12,10 @@
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1 class="h3">Invoices</h1>
+
+        {% if is_granted('ROLE_PAYMENT_ADMIN_INVOICE_CREATE') %}
+            <a href="{{ url('sfs_payment_admin_invoices_create') }}" class="btn btn-secondary">Create invoice</a>
+        {% endif %}
     </div>
 
     {{ form_start(filterForm, {'attr': {'class': 'form-inline mb-3 mx-3'}} )}}
@@ -25,7 +29,6 @@
             <th scope="col">{{ 'admin_invoice.list.fields.date.header'|trans }}</th>
             <th scope="col">{{ 'admin_invoice.list.fields.status.header'|trans }}</th>
             <th scope="col">{{ 'admin_invoice.list.fields.customer.header'|trans }}</th>
-            <th scope="col">{{ 'admin_invoice.list.fields.concept.header'|trans }}</th>
             <th scope="col">{{ 'admin_invoice.list.fields.amount.header'|trans }}</th>
             {% if read_route %}
                 <th>&nbsp;</th>

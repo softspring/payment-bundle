@@ -1,0 +1,23 @@
+{% trans_default_domain 'sfs_payment' %}
+{% extends '@SfsCustomer/admin_layout.html.twig' %}
+
+{% block title %}{{ 'admin_payment.refund.meta.title'|trans }}{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item"><a href="{{ url('sfs_payment_admin_payments_list') }}">{{ 'admin_payment.breadcrumb'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'admin_payment.refund.breadcrumb'|trans }}</li>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3">{{ 'admin_payment.refund.title'|trans }}</h1>
+    </div>
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <div class="d-flex justify-content-end align-items-center">
+        <a href="{{ url('sfs_payment_admin_payments_list') }}" class="btn btn-outline-secondary">{{ 'admin_payment.refund.actions.cancel.button'|trans }}</a>
+        <input type="submit" value="{{ 'admin_payment.refund.actions.refund.button'|trans }}" class="btn btn-primary ml-3" />
+    </div>
+    {{ form_end(form) }}
+{% endblock content %}

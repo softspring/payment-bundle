@@ -5,3 +5,11 @@ sfs_payment_admin_payments_list:
 sfs_payment_admin_payments_read:
     controller: sfs_payment.admin.payment.controller::read
     path: /{payment}
+
+sfs_payment_admin_payments_charge:
+    controller: sfs_payment.admin.payment.controller::create
+    path: /{customer}/charge
+
+sfs_payment_admin_payments_refund:
+    controller: sfs_payment.admin.payment.refund.controller::create
+    path: /{payment}/refund

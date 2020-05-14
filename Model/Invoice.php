@@ -2,6 +2,7 @@
 
 namespace Softspring\PaymentBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Softspring\CustomerBundle\Model\CustomerInterface;
 
@@ -51,6 +52,12 @@ abstract class Invoice implements InvoiceInterface
      * @var Collection|PaymentInterface[]
      */
     protected $payments;
+
+    public function __construct()
+    {
+        $this->concepts = new ArrayCollection();
+        $this->payments = new ArrayCollection();
+    }
 
     /**
      * @return CustomerInterface|null

@@ -1,6 +1,6 @@
 {% trans_default_domain 'sfs_payment' %}
 {% extends '@SfsPayment/admin_layout.html.twig' %}
-{% block title %}{{ 'admin_invoices.read.page_title'|trans }}{% endblock %}
+{% block title %}{{ 'admin_invoice.read.page_title'|trans }}{% endblock %}
 
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -8,10 +8,10 @@
     </div>
 
     <ul>
-        <li><strong>Platform:</strong> {{ invoice.platform }}</li>
-        <li><strong>Platform ID:</strong> {{ invoice.platformId }}</li>
+{#        <li><strong>Platform:</strong> {{ invoice.platform }}</li>#}
+{#        <li><strong>Platform ID:</strong> {{ invoice.platformId }}</li>#}
         <li><strong>Customer:</strong> {{ invoice.customer.name }}</li>
-        <li><strong>Source:</strong> {{ invoice.source.platformId }}</li>
+{#        <li><strong>Source:</strong> {{ invoice.source.platformId }}</li>#}
         <li><strong>Status:</strong> {{ invoice.statusString }}</li>
         <li><strong>Date:</strong> {{ invoice.date|date('H:i:s d-m-Y') }}</li>
         <li><strong>Concept:</strong> {{ invoice.concept }}</li>

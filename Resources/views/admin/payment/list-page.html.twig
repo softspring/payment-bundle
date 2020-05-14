@@ -12,7 +12,7 @@
         <td>{{ payment.amount|number_format(2) }} <small>{{ payment.currency }}</small></td>
 
         {% if read_route %}
-            <td><a href="{{ url(read_route, {'payment':payment}) }}" class="text-nowrap">{{ 'admin_payments.list.actions.details.button'|trans }}   <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a></td>
+            <td><a href="{{ url(read_route, {'payment':payment}) }}" class="text-nowrap">{{ 'admin_payment.list.actions.details.button'|trans }}   <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a></td>
         {% endif %}
     </tr>
 {% endfor %}

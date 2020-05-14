@@ -4,9 +4,8 @@ namespace Softspring\PaymentBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Softspring\CustomerBundle\Model\CustomerInterface;
-use Softspring\CustomerBundle\Model\PlatformObjectInterface;
 
-interface InvoiceInterface extends PlatformObjectInterface
+interface InvoiceInterface
 {
     const STATUS_DRAFT = 1;
     const STATUS_PENDING = 2;
@@ -39,6 +38,16 @@ interface InvoiceInterface extends PlatformObjectInterface
      * @param int|null $status
      */
     public function setStatus(?int $status): void;
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDate(): ?\DateTime;
+
+    /**
+     * @param \DateTime|null $date
+     */
+    public function setDate(?\DateTime $date): void;
 
     /**
      * @return Collection|ConceptInterface[]

@@ -2,10 +2,20 @@
 
 namespace Softspring\PaymentBundle\Model;
 
-use Softspring\CustomerBundle\Model\PlatformObjectInterface;
+use Softspring\CustomerBundle\Model\CustomerInterface;
 
-interface ConceptInterface extends PlatformObjectInterface
+interface ConceptInterface
 {
+    /**
+     * @return CustomerInterface|null
+     */
+    public function getCustomer(): ?CustomerInterface;
+
+    /**
+     * @param CustomerInterface|null $customer
+     */
+    public function setCustomer(?CustomerInterface $customer): void;
+
     /**
      * @return InvoiceInterface|null
      */

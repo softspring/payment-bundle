@@ -1,11 +1,31 @@
 payment:
     status:
         values:
-            1: 'Pending'
-            2: 'Done'
-            3: 'Failed'
+            1: "Pending"
+            2: "Done"
+            3: "Failed"
+    status_string:
+        pending: "Pending"
+        done: "Done"
+        failed: "Failed"
 
-admin_payments:
+invoice:
+    status:
+        1: "Draft"
+        2: "Pending"
+        3: "Paid"
+        4: "Partial paid"
+        5: "Unpaid"
+        6: "Canceled"
+    status_string:
+        draft: "Draft"
+        pending: "Pending"
+        paid: "Paid"
+        partial_paid: "Partial paid"
+        unpaid: "Unpaid"
+        canceled: "Canceled"
+
+admin_payment:
     list:
         page_title: "Payments"
         fields:
@@ -22,3 +42,52 @@ admin_payments:
             actions.search: "Search"
     read:
         page_title: "Payment details"
+
+admin_invoice:
+    breadcrumb: "Invoices"
+
+    list:
+        page_title: "Invoices"
+        fields:
+            date.header: "Date"
+            status.header: "Status"
+            customer.header: "Customer"
+            amount.header: "Import"
+
+    create:
+        meta.title: "New invoice"
+        breadcrumb: "New invoice"
+        title: "New invoice"
+        form:
+            date.label: "Date"
+            customer.label: "Customer"
+        actions:
+            cancel.button: "Cancel"
+            create.button: "Create"
+
+admin_concept:
+    breadcrumb: "Invoice concept"
+
+    list:
+        page_title: "Invoice concepts"
+        filter_form:
+            status.label: "Status"
+        fields:
+            status.header: "Status"
+            customer.header: "Customer"
+            concept.header: "Concept"
+            total.header: "Import"
+
+    create:
+        meta.title: "New invoice concept"
+        breadcrumb: "New invoice concept"
+        title: "New invoice concept"
+        form:
+            customer.label: "Customer"
+            concept.label: "Concept"
+            price.label: "Price per unit"
+            quantity.label: "Quantity"
+            currency.label: "Currency"
+        actions:
+            cancel.button: "Cancel"
+            create.button: "Create"

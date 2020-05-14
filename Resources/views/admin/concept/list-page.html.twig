@@ -1,0 +1,21 @@
+{% trans_default_domain 'sfs_payment' %}
+
+{% for concept in entities %}
+    <tr>
+        <td class="{{ concept.invoice ? 'text-success' : 'text-warning' }}">
+            {{ concept.invoice ? 'invoiced' : 'pending' }}
+        </td>
+        <td>{{ concept.customer.name|default('') }}</td>
+        <td>{{ concept.concept }}</td>
+
+        <td>{{ concept.total|number_format(2) }} <small>{{ concept.currency }}</small></td>
+
+        {% if read_route %}
+            <td>
+                <a href="{{ url(read_route, {'concept':concept}) }}" class="text-nowrap">
+{#                    {{ 'admin_concept.list.actions.details.button'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span>#}
+                </a>
+            </td>
+        {% endif %}
+    </tr>
+{% endfor %}

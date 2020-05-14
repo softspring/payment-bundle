@@ -1,0 +1,11 @@
+sfs_payment_admin_concepts_list:
+    controller: sfs_payment.admin.concept.controller::list
+    path: /
+
+sfs_payment_admin_concepts_create:
+    controller: sfs_payment.admin.concept.controller::create
+    path: /create
+
+sfs_payment_admin_concepts_read:
+    controller: sfs_payment.admin.concept.controller::read
+    path: /{concept}

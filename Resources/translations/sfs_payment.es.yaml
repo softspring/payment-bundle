@@ -1,9 +1,22 @@
 payment:
     status:
         values:
-            1: 'Pendiente'
-            2: 'Finalizado'
-            3: 'Fallido'
+            1: "Pendiente"
+            2: "Finalizado"
+            3: "Fallido"
+    status_string:
+        pending: "Pendiente"
+        done: "Finalizado"
+        failed: "Fallido"
+
+invoice:
+    status:
+        1: "Borrador"
+        2: "Pendiente"
+        3: "Cobrada"
+        4: "Cobro parcial"
+        5: "Sin cobrar"
+        6: "Cancelada"
 
 admin_payments:
     list:
@@ -22,3 +35,23 @@ admin_payments:
             actions.search: "Buscar"
     read:
         page_title: "Detalles del pago"
+
+admin_invoices:
+    list:
+        page_title: "Facturas"
+        fields:
+            date.header: "Fecha"
+            status.header: "Estado"
+            customer.header: "Cliente"
+            amount.header: "Importe"
+
+admin_concepts:
+    list:
+        page_title: "Invoice concepts"
+        filter_form:
+            status.label: "Estado"
+        fields:
+            status.header: "Estado"
+            customer.header: "Cliente"
+            concept.header: "Concepto"
+            total.header: "Importe"

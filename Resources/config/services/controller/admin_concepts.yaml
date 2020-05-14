@@ -1,0 +1,49 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\PaymentBundle\Form\Admin\ConceptCreateFormInterface:
+        class: 'Softspring\PaymentBundle\Form\Admin\ConceptCreateForm'
+
+    Softspring\PaymentBundle\Form\Admin\ConceptListFilterFormInterface:
+        class: 'Softspring\PaymentBundle\Form\Admin\ConceptListFilterForm'
+
+    Softspring\PaymentBundle\EventListener\Admin\ConceptListener:
+        tags: ['kernel.event_subscriber']
+
+    sfs_payment.admin.concept.controller:
+        class: Softspring\CrudlBundle\Controller\CrudlController
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $manager: '@Softspring\PaymentBundle\Manager\ConceptManagerInterface'
+            $listFilterForm: '@Softspring\PaymentBundle\Form\Admin\ConceptListFilterFormInterface'
+            $createForm: '@Softspring\PaymentBundle\Form\Admin\ConceptCreateFormInterface'
+            $updateForm: null
+            $deleteForm: null
+            $config:
+                entity_attribute: 'concept'
+                list:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_CONCEPT_LIST'
+                    filter_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_LIST_FILTER
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_LIST_VIEW
+                    view: '@@SfsPayment/admin/concept/list.html.twig'
+                    view_page: '@@SfsPayment/admin/concept/list-page.html.twig'
+                    read_route: 'sfs_payment_admin_concepts_read'
+                read:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_CONCEPT_DETAILS'
+                    param_converter_key: 'id'
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_READ_VIEW
+                    view: '@@SfsPayment/admin/concept/read.html.twig'
+                create:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_CONCEPT_CREATE'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_CREATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_CREATE_FORM_VALID
+                    success_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_CREATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_CREATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_CREATE_VIEW
+                    view: '@@SfsPayment/admin/concept/create.html.twig'

@@ -1,0 +1,19 @@
+{% trans_default_domain 'sfs_payment' %}
+{% extends '@SfsPayment/admin_layout.html.twig' %}
+{% block title %}{{ 'admin_concept.read.page_title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3">Payment</h1>
+    </div>
+
+    <ul>
+{#        <li><strong>Platform:</strong> {{ concept.platform }}</li>#}
+{#        <li><strong>Platform ID:</strong> {{ concept.platformId }}</li>#}
+        <li><strong>Customer:</strong> {{ concept.customer.name }}</li>
+{#        <li><strong>Source:</strong> {{ concept.source.platformId }}</li>#}
+        <li><strong>Status:</strong> {{ concept.statusString }}</li>
+        <li><strong>Date:</strong> {{ concept.date|date('H:i:s d-m-Y') }}</li>
+        <li><strong>Concept:</strong> {{ concept.concept }}</li>
+    </ul>
+{% endblock content %}

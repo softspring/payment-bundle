@@ -3,9 +3,20 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            $em: '@sfs_payment.entity_manager'
+
+    Softspring\PaymentBundle\Form\Admin\PaymentCreateFormInterface:
+        class: 'Softspring\PaymentBundle\Form\Admin\PaymentCreateForm'
+
+    Softspring\PaymentBundle\Form\Admin\PaymentRefundFormInterface:
+        class: 'Softspring\PaymentBundle\Form\Admin\PaymentRefundForm'
 
     Softspring\PaymentBundle\Form\Admin\PaymentListFilterFormInterface:
         class: 'Softspring\PaymentBundle\Form\Admin\PaymentListFilterForm'
+
+    Softspring\PaymentBundle\EventListener\Admin\PaymentListener:
+        tags: ['kernel.event_subscriber']
 
     sfs_payment.admin.payment.controller:
         class: Softspring\CrudlBundle\Controller\CrudlController
@@ -15,7 +26,7 @@ services:
         arguments:
             $manager: '@Softspring\PaymentBundle\Manager\PaymentManagerInterface'
             $listFilterForm: '@Softspring\PaymentBundle\Form\Admin\PaymentListFilterFormInterface'
-            $createForm: null
+            $createForm: '@Softspring\PaymentBundle\Form\Admin\PaymentCreateFormInterface'
             $updateForm: null
             $deleteForm: null
             $config:
@@ -32,3 +43,35 @@ services:
                     param_converter_key: 'id'
                     view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_READ_VIEW
                     view: '@@SfsPayment/admin/payment/read.html.twig'
+                create:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_PAYMENT_CREATE'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_CREATE_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_CREATE_FORM_VALID
+                    success_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_CREATE_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_CREATE_FORM_INVALID
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_CREATE_VIEW
+                    view: '@@SfsPayment/admin/payment/create.html.twig'
+
+    sfs_payment.admin.payment.refund.controller:
+        class: Softspring\CrudlBundle\Controller\CrudlController
+        public: true
+        calls:
+            - { method: setContainer, arguments: ['@service_container'] }
+        arguments:
+            $manager: '@Softspring\PaymentBundle\Manager\PaymentManagerInterface'
+            $listFilterForm: null
+            $createForm: '@Softspring\PaymentBundle\Form\Admin\PaymentRefundFormInterface'
+            $updateForm: null
+            $deleteForm: null
+            $config:
+                entity_attribute: 'refund'
+                create:
+                    is_granted: 'ROLE_PAYMENT_ADMIN_PAYMENT_REFUND'
+                    param_converter_key: 'id'
+                    initialize_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_REFUND_INITIALIZE
+                    form_valid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_REFUND_FORM_VALID
+                    success_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_REFUND_SUCCESS
+                    form_invalid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_REFUND_FORM_INVALID
+                    view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_PAYMENTS_REFUND_VIEW
+                    view: '@@SfsPayment/admin/payment/refund.html.twig'
