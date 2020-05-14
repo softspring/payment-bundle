@@ -22,5 +22,5 @@
         {% endif %}
     </ul>
 
-    {% include '@SfsPlatform/platform_data.html.twig' with {'platformObject': payment} %}
+    {% include '@SfsPlatform/platform_data.html.twig' ignore missing with {'platformObject': payment} %}
 {% endblock content %}
