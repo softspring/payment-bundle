@@ -1,0 +1,19 @@
+{% trans_default_domain 'sfs_payment' %}
+{% extends '@SfsPayment/admin_layout.html.twig' %}
+{% block title %}{{ 'admin_discount_rule.read.page_title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3">Payment</h1>
+    </div>
+
+    <ul>
+{#        <li><strong>Platform:</strong> {{ discount_rule.platform }}</li>#}
+{#        <li><strong>Platform ID:</strong> {{ discount_rule.platformId }}</li>#}
+        <li><strong>Customer:</strong> {{ discount_rule.customer.name }}</li>
+{#        <li><strong>Source:</strong> {{ discount_rule.source.platformId }}</li>#}
+        <li><strong>Status:</strong> {{ discount_rule.statusString }}</li>
+        <li><strong>Date:</strong> {{ discount_rule.date|date('H:i:s d-m-Y') }}</li>
+        <li><strong>Discount:</strong> {{ discount_rule.discount_rule }}</li>
+    </ul>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% trans_default_domain 'sfs_payment' %}
+{% extends '@SfsCustomer/admin_layout.html.twig' %}
+
+{% block title %}{{ 'admin_discount_rule.create.meta.title'|trans }}{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item"><a href="{{ url('sfs_payment_admin_discount_rules_list') }}">{{ 'admin_discount_rule.breadcrumb'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'admin_discount_rule.create.breadcrumb'|trans }}</li>
+{% endblock breadcrums_content %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3">{{ 'admin_discount_rule.create.title'|trans }}</h1>
+    </div>
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <div class="d-flex justify-content-end align-items-center">
+        <a href="{{ url('sfs_payment_admin_discount_rules_list') }}" class="btn btn-outline-secondary">{{ 'admin_discount_rule.create.actions.cancel.button'|trans }}</a>
+        <input type="submit" value="{{ 'admin_discount_rule.create.actions.create.button'|trans }}" class="btn btn-primary ml-3" />
+    </div>
+    {{ form_end(form) }}
+{% endblock content %}

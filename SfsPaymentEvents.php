@@ -188,4 +188,44 @@ class SfsPaymentEvents
      * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_DISCOUNTS_CREATE_VIEW = 'sfs_payment.admin.discounts.create_view';
+
+    /**
+     * @Event("Softspring\CrudlBundle\Event\FilterEvent")
+     */
+    const ADMIN_DISCOUNT_RULES_LIST_FILTER = 'sfs_payment.admin.discount_rules.list_filter';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_DISCOUNT_RULES_LIST_VIEW = 'sfs_payment.admin.discount_rules.list_view';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_DISCOUNT_RULES_READ_VIEW = 'sfs_payment.admin.discount_rules.read_view';
+
+    /**
+     * @Event("Softspring\CrudlBundle\Event\GetResponseEntityEvent")
+     */
+    const ADMIN_DISCOUNT_RULES_CREATE_INITIALIZE = 'sfs_payment.admin.discount_rules.create_initialize';
+
+    /**
+     * @Event("Softspring\CrudlBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_DISCOUNT_RULES_CREATE_FORM_VALID = 'sfs_payment.admin.discount_rules.create_form_valid';
+
+    /**
+     * @Event("Softspring\CrudlBundle\Event\GetResponseEntityEvent")
+     */
+    const ADMIN_DISCOUNT_RULES_CREATE_SUCCESS = 'sfs_payment.admin.discount_rules.create_success';
+
+    /**
+     * @Event("Softspring\CrudlBundle\Event\GetResponseFormEvent")
+     */
+    const ADMIN_DISCOUNT_RULES_CREATE_FORM_INVALID = 'sfs_payment.admin.discount_rules.create_form_invalid';
+
+    /**
+     * @Event("Softspring\CoreBundle\Event\ViewEvent")
+     */
+    const ADMIN_DISCOUNT_RULES_CREATE_VIEW = 'sfs_payment.admin.discount_rules.create_view';
 }

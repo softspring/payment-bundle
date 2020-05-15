@@ -1,0 +1,17 @@
+{% trans_default_domain 'sfs_payment' %}
+
+{% for discount_rule in entities %}
+    <tr>
+        <td>{{ discount_rule.name|default('') }}</td>
+        <td>{{ discount_rule.active ? 'yes' : 'no' }}</td>
+        <td>{{ discount_rule.priority }}</td>
+
+        {% if read_route %}
+            <td>
+                <a href="{{ url(read_route, {'discount_rule':discount_rule}) }}" class="text-nowrap">
+{#                    {{ 'admin_discount_rule.list.actions.details.button'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span>#}
+                </a>
+            </td>
+        {% endif %}
+    </tr>
+{% endfor %}

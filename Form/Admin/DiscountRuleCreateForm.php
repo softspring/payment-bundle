@@ -4,17 +4,19 @@ namespace Softspring\PaymentBundle\Form\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\CustomerBundle\Manager\CustomerManagerInterface;
-use Softspring\PaymentBundle\Model\DiscountInterface;
+use Softspring\PaymentBundle\Model\DiscountRuleInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Range;
 
-class DiscountCreateForm extends AbstractType implements DiscountCreateFormInterface
+class DiscountRuleCreateForm extends AbstractType implements DiscountRuleCreateFormInterface
 {
     /**
      * @var CustomerManagerInterface
@@ -41,9 +43,9 @@ class DiscountCreateForm extends AbstractType implements DiscountCreateFormInter
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => DiscountInterface::class,
+            'data_class' => DiscountRuleInterface::class,
             'translation_domain' => 'sfs_payment',
-            'label_format' => 'admin_discount.create.form.%name%.label',
+            'label_format' => 'admin_discount_rule.create.form.%name%.label',
         ]);
     }
 
@@ -51,32 +53,17 @@ class DiscountCreateForm extends AbstractType implements DiscountCreateFormInter
     {
         $builder->add('name');
 
-        $builder->add('type', ChoiceType::class, [
-            'choices' => [
-                'TYPE_PERCENTAGE' => DiscountInterface::TYPE_PERCENTAGE,
-                'TYPE_FIXED_AMOUNT' => DiscountInterface::TYPE_FIXED_AMOUNT,
-            ],
-        ]);
+        $builder->add('priority', IntegerType::class);
 
-        $builder->add('due', ChoiceType::class, [
-            'choices' => [
-                'DUE_NEVER' => DiscountInterface::DUE_NEVER,
-                'DUE_DATE' => DiscountInterface::DUE_DATE,
-                'DUE_AFTER_ONCE' => DiscountInterface::DUE_AFTER_ONCE,
-                'DUE_AFTER_REPEATS' => DiscountInterface::DUE_AFTER_REPEATS,
-            ],
+        $builder->add('active', CheckboxType::class, [
+            'required' => false,
         ]);
-
-        $builder->add('value', NumberType::class, [
-            'constraints' => new Range(['min' => 0]),
-        ]);
-
-        $builder->add('currency', CurrencyType::class, [
-            'preferred_choices' => ['EUR', 'USD'],
+        $builder->add('stopApply', CheckboxType::class, [
+            'required' => false,
         ]);
     }
 
-    public function formOptions(DiscountInterface $discount, Request $request): array
+    public function formOptions(DiscountRuleInterface $discount, Request $request): array
     {
         $options = [];
 

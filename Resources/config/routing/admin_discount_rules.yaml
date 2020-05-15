@@ -1,0 +1,11 @@
+sfs_payment_admin_discount_rules_list:
+    controller: sfs_payment.admin.discount_rule.controller::list
+    path: /
+
+sfs_payment_admin_discount_rules_create:
+    controller: sfs_payment.admin.discount_rule.controller::create
+    path: /create
+
+sfs_payment_admin_discount_rules_read:
+    controller: sfs_payment.admin.discount_rule.controller::read
+    path: /{discount_rule}

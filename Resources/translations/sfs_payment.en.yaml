@@ -113,3 +113,27 @@ admin_discount:
             cancel.button: "Cancel"
             create.button: "Create"
 
+admin_discount_rule:
+    breadcrumb: "Discount rule"
+
+    list:
+        page_title: "Discount rules"
+        fields:
+            name.header: "Name"
+            active.header: "Active"
+            stop_apply.header: "Stop apply"
+            priority.header: "Priority"
+
+    create:
+        meta.title: "New discount rule"
+        breadcrumb: "New discount rule"
+        title: "New discount rule"
+        form:
+            name.label: "Name"
+            active.label: "Active"
+            stopApply.label: "Stop apply"
+            priority.label: "Priority"
+        actions:
+            cancel.button: "Cancel"
+            create.button: "Create"
+

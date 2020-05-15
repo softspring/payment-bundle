@@ -23,6 +23,7 @@ class SfsPaymentExtension extends Extension
 
         $container->setParameter('sfs_payment.concept.class', $config['model']['concept']);
         $container->setParameter('sfs_payment.discount.class', $config['model']['discount']);
+        $container->setParameter('sfs_payment.discount_rule.class', $config['model']['discount_rule']);
         $container->setParameter('sfs_payment.invoice.class', $config['model']['invoice']);
         $container->setParameter('sfs_payment.payment.class', $config['model']['payment']);
 
@@ -39,6 +40,11 @@ class SfsPaymentExtension extends Extension
         if (!empty($config['model']['discount'])) {
             $loader->load('controller/admin_discounts.yaml');
             $loader->load('manager/discount.yaml');
+        }
+
+        if (!empty($config['model']['discount_rule'])) {
+            $loader->load('controller/admin_discount_rules.yaml');
+            $loader->load('manager/discount_rule.yaml');
         }
     }
 }
