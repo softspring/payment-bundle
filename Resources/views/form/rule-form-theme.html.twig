@@ -1,0 +1,35 @@
+{%- block polymorphic_prototype_buttons -%}
+    <!-- Buttons -->
+    <div id="polymorphic_prototypes" class="dropdown polymorphic-collection-prototypes">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Add {{ name }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="max-height: 200px; overflow-y: scroll">
+            {% for key, prototype in form.vars.prototypes %}
+                <a href="#" {{ block('polymorphic_prototype_button_attributes') }}>
+                    {{ translation_domain is same as(false) ? prototype.vars.prototype_button_label : prototype.vars.prototype_button_label|trans({}, translation_domain) }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{%- endblock polymorphic_prototype_buttons -%}
+
+{% block date_range_condition_row %}
+    <div class="node-row mt-2 mb-2" {{ block('widget_container_attributes') }}>
+        <div class="row">
+            <div class="col-sm-1">{{ form.vars.name }}</div>
+            <div class="col-sm-10">{{ form_widget(form) }}{{ form_errors(form) }}</div>
+            <div class="col-sm-1"><a class="btn btn-light remove_polymorphic_node" href="#">X</a></div>
+        </div>
+    </div>
+{% endblock date_range_condition_row %}
+
+{% block date_range_condition_widget %}
+    <div class="row {{ not form.parent.vars.valid ? 'show-invalid' }}">
+        <div class="col-sm-2">{{ form_label(form.fromDate) }}</div>
+        <div class="col-sm-4">{{ form_widget(form.fromDate) }}{{ form_errors(form.fromDate) }}</div>
+        <div class="col-sm-2">{{ form_label(form.toDate) }}</div>
+        <div class="col-sm-4">{{ form_widget(form.toDate) }}{{ form_errors(form.toDate) }}</div>
+        {{ form_rest(form) }}
+    </div>
+{% endblock date_range_condition_widget %}

@@ -5,6 +5,12 @@ services:
         public: false
         bind:
             $em: '@sfs_payment.entity_manager'
+            $conditionClass: '%sfs_payment.discount_rule_condition.class%'
+            $conditionMappings: '%sfs_payment.discount_rule_condition.mapping%'
+
+    Softspring\PaymentBundle\Doctrine\DiscountRuleConditionMetadata:
+        tags:
+            - { 'name': 'doctrine.event_listener', event: 'loadClassMetadata', lazy: true  }
 
     Softspring\PaymentBundle\Manager\DiscountRuleManagerInterface:
         class: Softspring\PaymentBundle\Manager\DiscountRuleManager

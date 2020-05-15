@@ -4,6 +4,7 @@ namespace Softspring\PaymentBundle\Form\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\CustomerBundle\Manager\CustomerManagerInterface;
+use Softspring\PaymentBundle\Form\Admin\DiscountRule\ConditionsCollectionType;
 use Softspring\PaymentBundle\Model\DiscountRuleInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -61,6 +62,8 @@ class DiscountRuleCreateForm extends AbstractType implements DiscountRuleCreateF
         $builder->add('stopApply', CheckboxType::class, [
             'required' => false,
         ]);
+
+        $builder->add('conditions', ConditionsCollectionType::class);
     }
 
     public function formOptions(DiscountRuleInterface $discount, Request $request): array

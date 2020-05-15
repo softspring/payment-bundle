@@ -3,6 +3,15 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            $em: '@sfs_payment.entity_manager'
+            $conditionClass: '%sfs_payment.discount_rule_condition.class%'
+            $conditionMappings: '%sfs_payment.discount_rule_condition.mapping%'
+            $formFactory: '@form.factory'
+
+    Softspring\PaymentBundle\Form\Admin\DiscountRule\:
+        resource: '../../../Form/Admin/DiscountRule'
+        tags: ['form.type']
 
     Softspring\PaymentBundle\Form\Admin\DiscountRuleCreateFormInterface:
         class: 'Softspring\PaymentBundle\Form\Admin\DiscountRuleCreateForm'

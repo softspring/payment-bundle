@@ -18,7 +18,7 @@ class SfsPaymentBundle extends Bundle
         parent::build($container);
 
         $basePath = realpath(__DIR__.'/Resources/config/doctrine-mapping/');
-
+        $this->addRegisterMappingsPass($container, [realpath($basePath.'/Rule/Condition/') => 'Softspring\PaymentBundle\Model\Rule\Condition']);
         $this->addRegisterMappingsPass($container, [$basePath => 'Softspring\PaymentBundle\Model']);
 
         $container->addCompilerPass(new AliasDoctrineEntityManagerPass());

@@ -2,6 +2,8 @@
 
 namespace Softspring\PaymentBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 interface DiscountRuleInterface
 {
 //    const TARGET_CART = '';
@@ -19,10 +21,6 @@ interface DiscountRuleInterface
 
     public function setActive(bool $active): void;
 
-//    public function getFromDate();
-//
-//    public function getToDate();
-
     public function getPriority(): int;
 
     public function setPriority(int $priority): void;
@@ -31,7 +29,21 @@ interface DiscountRuleInterface
 
     public function setStopApply(bool $stopApply): void;
 
-//    public function getConditions();
-//
-//    public function getActions();
+    /**
+     * @return Collection|DiscountRuleConditionInterface[]
+     */
+    public function getConditions(): Collection;
+
+    public function addCondition(DiscountRuleConditionInterface $condition): void;
+
+    public function removeCondition(DiscountRuleConditionInterface $condition): void;
+
+    /**
+     * @return Collection|DiscountRuleActionInterface[]
+     */
+    public function getActions(): Collection;
+
+    public function addAction(DiscountRuleActionInterface $action): void;
+
+    public function removeAction(DiscountRuleActionInterface $action): void;
 }
