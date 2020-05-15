@@ -7,7 +7,8 @@
         "ext-json": "*",
         "softspring/crudl-bundle": "^1.0.1",
         "softspring/customer-bundle": "^1.1@dev",
-        "softspring/doctrine-templates": "^1.0.4"
+        "softspring/doctrine-templates": "^1.0.4",
+        "softspring/polymorphic-form-type": "^1.0@dev"
     },
     "autoload": {
         "psr-4": {
