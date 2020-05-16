@@ -24,7 +24,7 @@ class SfsPaymentExtension extends Extension implements PrependExtensionInterface
 
         $container->setParameter('sfs_payment.concept.class', $config['model']['concept']);
         $container->setParameter('sfs_payment.discount.class', $config['model']['discount']);
-        $container->setParameter('sfs_payment.discount_rule.class', $config['model']['discount_rule']['class']);
+        $container->setParameter('sfs_payment.discount_rule.class', $config['model']['discount_rule']['class'] ?? null);
         $container->setParameter('sfs_payment.discount_rule_condition.class', $config['model']['discount_rule']['condition']['class'] ?? null);
         $container->setParameter('sfs_payment.discount_rule_condition.mapping', $config['model']['discount_rule']['condition']['mapping'] ?? null);
         $container->setParameter('sfs_payment.discount_rule_action.class', $config['model']['discount_rule']['action']['class'] ?? null);

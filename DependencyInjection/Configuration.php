@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('concept')->defaultValue('App\Entity\Concept')->end()
                         ->scalarNode('discount')->defaultNull()->end()
                         ->arrayNode('discount_rule')
-                            ->addDefaultsIfNotSet()
+                            ->treatNullLike([])
                             ->children()
                                 ->scalarNode('class')->defaultValue('App\Entity\DiscountRule')->end()
                                 ->arrayNode('condition')
