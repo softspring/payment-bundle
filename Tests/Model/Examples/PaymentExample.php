@@ -1,6 +1,6 @@
 <?php
 
-namespace Softspring\PaymentBundle\tests\Model\Examples;
+namespace Softspring\PaymentBundle\Tests\Model\Examples;
 
 use Softspring\PaymentBundle\Model\Payment;
 
