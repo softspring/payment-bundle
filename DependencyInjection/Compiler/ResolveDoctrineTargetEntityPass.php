@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping\MappingException;
 use Softspring\CoreBundle\DependencyInjection\Compiler\AbstractResolveDoctrineTargetEntityPass;
 use Softspring\PaymentBundle\Model\ConceptInterface;
 use Softspring\PaymentBundle\Model\DiscountInterface;
-use Softspring\PaymentBundle\Model\DiscountRuleActionInterface;
 use Softspring\PaymentBundle\Model\DiscountRuleConditionInterface;
 use Softspring\PaymentBundle\Model\DiscountRuleInterface;
 use Softspring\PaymentBundle\Model\InvoiceInterface;
@@ -35,7 +34,6 @@ class ResolveDoctrineTargetEntityPass extends AbstractResolveDoctrineTargetEntit
         $this->setTargetEntityFromParameter('sfs_payment.discount.class', DiscountInterface::class, $container, false);
         $this->setTargetEntityFromParameter('sfs_payment.discount_rule.class', DiscountRuleInterface::class, $container, false);
         $this->setTargetEntityFromParameter('sfs_payment.discount_rule_condition.class', DiscountRuleConditionInterface::class, $container, false);
-        $this->setTargetEntityFromParameter('sfs_payment.discount_rule_action.class', DiscountRuleActionInterface::class, $container, false);
         $this->setTargetEntityFromParameter('sfs_payment.invoice.class', InvoiceInterface::class, $container, true);
         $this->setTargetEntityFromParameter('sfs_payment.payment.class', PaymentInterface::class, $container, true);
     }
