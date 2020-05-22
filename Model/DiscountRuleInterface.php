@@ -6,13 +6,6 @@ use Doctrine\Common\Collections\Collection;
 
 interface DiscountRuleInterface
 {
-//    const TARGET_CART = '';
-//    const TARGET_CART_ITEM = '';
-//    const TARGET_SUBSCRIPTION = '';
-//    const TARGET_INVOICE = '';
-//
-//    public function getTarget();
-
     public function getName(): ?string;
 
     public function setName(?string $name): void;
@@ -38,12 +31,9 @@ interface DiscountRuleInterface
 
     public function removeCondition(DiscountRuleConditionInterface $condition): void;
 
-    /**
-     * @return Collection|DiscountRuleActionInterface[]
-     */
-    public function getActions(): Collection;
+    public function getDiscount(): ?DiscountInterface;
 
-    public function addAction(DiscountRuleActionInterface $action): void;
+    public function setDiscount(?DiscountInterface $discount): void;
 
-    public function removeAction(DiscountRuleActionInterface $action): void;
+    public function matches($object): bool;
 }

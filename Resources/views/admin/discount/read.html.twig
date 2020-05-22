@@ -2,18 +2,62 @@
 {% extends '@SfsPayment/admin_layout.html.twig' %}
 {% block title %}{{ 'admin_discount.read.page_title'|trans }}{% endblock %}
 
+{% block breadcrums_content %}
+    {{ parent() }}
+    <li class="breadcrumb-item"><a href="{{ url('sfs_payment_admin_discounts_list') }}">{{ 'admin_discount.breadcrumb'|trans }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ discount.name }}</li>
+{% endblock breadcrums_content %}
+
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">Payment</h1>
+        <h1 class="h3">{{ discount.name }}</h1>
     </div>
 
     <ul>
-{#        <li><strong>Platform:</strong> {{ discount.platform }}</li>#}
-{#        <li><strong>Platform ID:</strong> {{ discount.platformId }}</li>#}
-        <li><strong>Customer:</strong> {{ discount.customer.name }}</li>
-{#        <li><strong>Source:</strong> {{ discount.source.platformId }}</li>#}
-        <li><strong>Status:</strong> {{ discount.statusString }}</li>
-        <li><strong>Date:</strong> {{ discount.date|date('H:i:s d-m-Y') }}</li>
-        <li><strong>Discount:</strong> {{ discount.discount }}</li>
+        <li><strong>Target:</strong> {{ discount.target ? ('discount.target.'~discount.target)|trans : '' }}</li>
+        <li><strong>Due:</strong> {{ discount.due ? ('discount.due.'~discount.due)|trans : '' }}</li>
+        <li><strong>Value:</strong>
+            -{{ discount.value|number_format(2) }}
+            {% if discount.type == constant('Softspring\\PaymentBundle\\Model\\DiscountInterface::TYPE_FIXED_AMOUNT') %}
+                <small>{{ discount.currency }}</small>
+            {% else %}
+                %
+            {% endif %}
+        </li>
     </ul>
+
+    <div class="d-flex align-items-center justify-content-between mt-5 mb-3">
+        <h3 class="h4">Rules</h3>
+
+        {% if is_granted('ROLE_PAYMENT_ADMIN_DISCOUNT_RULE_CREATE') %}
+            <a href="{{ url('sfs_payment_admin_discount_child_rules_create', {'discount':discount}) }}" class="btn btn-secondary">Create rule</a>
+        {% endif %}
+    </div>
+
+    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':discount.rules, 'classes': 'row-link table-striped table-hover'} %}
+        {% trans_default_domain 'sfs_payment' %}
+        {% block ths %}
+            <th scope="col">Rule</th>
+            <th scope="col">Active</th>
+            <th scope="col">Priority</th>
+        {% endblock ths %}
+
+        {% block tbody %}
+            {% for rule in discount.rules %}
+                <tr data-href="{{ url('sfs_payment_admin_discount_child_rules_read', {'discount': discount, 'discount_rule': rule}) }}">
+                    <td>{{ rule.name|default('') }}</td>
+                    <td>{{ rule.active ? 'yes' : 'no' }}</td>
+                    <td>{{ rule.priority }}</td>
+                </tr>
+            {% endfor %}
+        {% endblock tbody %}
+
+        {% block empty %}
+            <div class="p-5 m-5">
+                <p class="text-center text-muted">
+                    This discount has not any rule
+                </p>
+            </div>
+        {% endblock empty %}
+    {% endembed %}
 {% endblock content %}

@@ -25,6 +25,34 @@ invoice:
         unpaid: "Unpaid"
         canceled: "Canceled"
 
+discount:
+    type:
+        1: "Percentage"
+        2: "Fixed amount"
+    type_string:
+        percentage: "Percentage"
+        fixed_amount: "Fixed amount"
+    target:
+        1: "Invoice"
+        10: "Cart"
+        11: "Cart item"
+        20: "Subscription"
+    target_string:
+        invoice: "Invoice"
+        shopping_cart: "Cart"
+        shopping_salable: "Cart item"
+        subscription: "Subscription"
+    due:
+        1: "Dues never"
+        2: "Dues on date"
+        3: "Dues after once"
+        4: "Dues after repeats"
+    due_string:
+        never: "Dues never"
+        date: "Dues on date"
+        after_once: "Dues after once"
+        after_repeats: "Dues after repeats"
+
 admin_payment:
     list:
         page_title: "Payments"
@@ -93,15 +121,20 @@ admin_concept:
             create.button: "Create"
 
 admin_discount:
-    breadcrumb: "Discount"
+    breadcrumb: "Discounts"
+
+    read:
+        page_title: "Discount"
 
     list:
         page_title: "Discounts"
         fields:
             name.header: "Name"
+            target.header: "Target"
             type.header: "Type"
             due.header: "Dues"
             value.header: "Value"
+            activeRules.header: "Active rules"
 
     create:
         meta.title: "New discount"
@@ -109,6 +142,11 @@ admin_discount:
         title: "New discount"
         form:
             currency.label: "Currency"
+            name.label: "Name"
+            target.label: "Target"
+            type.label: "Type"
+            due.label: "Dues"
+            value.label: "Value"
         actions:
             cancel.button: "Cancel"
             create.button: "Create"
@@ -128,12 +166,36 @@ admin_discount_rule:
         meta.title: "New discount rule"
         breadcrumb: "New discount rule"
         title: "New discount rule"
-        form:
-            name.label: "Name"
-            active.label: "Active"
-            stopApply.label: "Stop apply"
-            priority.label: "Priority"
         actions:
             cancel.button: "Cancel"
             create.button: "Create"
 
+    update:
+        meta.title: "Edit discount rule"
+        breadcrumb: "Edit discount rule"
+        title: "Edit discount rule"
+        actions:
+            cancel.button: "Cancel"
+            update.button: "Save changes"
+
+    read:
+        breadcrumb: "Rule details"
+        page_title: "Rule %name%"
+
+    form:
+        name.label: "Name"
+        active.label: "Active"
+        stopApply.label: "Stop apply"
+        priority.label: "Priority"
+        conditions.label: "Conditions"
+        conditions:
+            date_range:
+                prototype_button: "Date range"
+                fromDate.label: "From date"
+                toDate.label: "To date"
+            store:
+                prototype_button: "Store"
+                store.label: "Store"
+            salable_item:
+                prototype_button: "Cart salable item"
+                salableItem.label: "Cart salable item"

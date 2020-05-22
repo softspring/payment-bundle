@@ -2,12 +2,20 @@
 
 namespace Softspring\PaymentBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 abstract class Discount implements DiscountInterface
 {
     /**
      * @var string|null
      */
     protected $name;
+
+    /**
+     * @var int|null
+     */
+    protected $target;
 
     /**
      * @var int|null
@@ -30,6 +38,16 @@ abstract class Discount implements DiscountInterface
     protected $value;
 
     /**
+     * @var DiscountRuleInterface[]|Collection
+     */
+    protected $rules;
+
+    public function __construct()
+    {
+        $this->rules = new ArrayCollection();
+    }
+
+    /**
      * @return string|null
      */
     public function getName(): ?string
@@ -43,6 +61,22 @@ abstract class Discount implements DiscountInterface
     public function setName(?string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getTarget(): ?int
+    {
+        return $this->target;
+    }
+
+    /**
+     * @param int|null $target
+     */
+    public function setTarget(?int $target): void
+    {
+        $this->target = $target;
     }
 
     /**
@@ -107,5 +141,38 @@ abstract class Discount implements DiscountInterface
     public function setValue(?float $value): void
     {
         $this->value = $value;
+    }
+
+    /**
+     * @return Collection|DiscountRuleInterface[]
+     */
+    public function getRules(): Collection
+    {
+        return $this->rules;
+    }
+
+    /**
+     * @return Collection|DiscountRuleInterface[]
+     */
+    public function getActiveRules(): Collection
+    {
+        return $this->getRules()->filter(function(DiscountRuleInterface $rule) {
+            return $rule->isActive();
+        });
+    }
+
+    public function addRule(DiscountRuleInterface $rule)
+    {
+        if (!$this->rules->contains($rule)) {
+            $this->rules->add($rule);
+            $rule->setDiscount($this);
+        }
+    }
+
+    public function removeRule(DiscountRuleInterface $rule)
+    {
+        if ($this->rules->contains($rule)) {
+            $this->rules->removeElement($rule);
+        }
     }
 }

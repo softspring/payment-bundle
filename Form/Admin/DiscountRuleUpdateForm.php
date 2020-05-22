@@ -5,20 +5,15 @@ namespace Softspring\PaymentBundle\Form\Admin;
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\CustomerBundle\Manager\CustomerManagerInterface;
 use Softspring\PaymentBundle\Form\Admin\DiscountRule\ConditionsCollectionType;
-use Softspring\PaymentBundle\Model\DiscountInterface;
 use Softspring\PaymentBundle\Model\DiscountRuleInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Range;
 
-class DiscountRuleCreateForm extends AbstractType implements DiscountRuleCreateFormInterface
+class DiscountRuleUpdateForm extends AbstractType implements DiscountRuleUpdateFormInterface
 {
     /**
      * @var CustomerManagerInterface
@@ -31,7 +26,7 @@ class DiscountRuleCreateForm extends AbstractType implements DiscountRuleCreateF
     protected $em;
 
     /**
-     * PaymentCreateForm constructor.
+     * PaymentUpdateForm constructor.
      *
      * @param CustomerManagerInterface $customerManager
      * @param EntityManagerInterface   $em

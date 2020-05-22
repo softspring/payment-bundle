@@ -5,7 +5,7 @@ namespace Softspring\PaymentBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class DiscountRule implements DiscountRuleInterface
+abstract class DiscountRule implements DiscountRuleInterface
 {
     /**
      * @var string|null
@@ -33,14 +33,13 @@ class DiscountRule implements DiscountRuleInterface
     protected $conditions;
 
     /**
-     * @var DiscountRuleActionInterface[]|Collection
+     * @var DiscountInterface|null
      */
-    protected $actions;
+    protected $discount;
 
     public function __construct()
     {
         $this->conditions = new ArrayCollection();
-        $this->actions = new ArrayCollection();
     }
 
     /**
@@ -127,23 +126,34 @@ class DiscountRule implements DiscountRuleInterface
         }
     }
 
-    public function getActions(): Collection
+    /**
+     * @return DiscountInterface|null
+     */
+    public function getDiscount(): ?DiscountInterface
     {
-        return $this->actions;
+        return $this->discount;
     }
 
-    public function addAction(DiscountRuleActionInterface $action): void
+    /**
+     * @param DiscountInterface|null $discount
+     */
+    public function setDiscount(?DiscountInterface $discount): void
     {
-        if (!$this->actions->contains($action)) {
-            $this->actions->add($action);
-            $action->setRule($this);
-        }
+        $this->discount = $discount;
     }
 
-    public function removeAction(DiscountRuleActionInterface $action): void
+    public function matches($object): bool
     {
-        if ($this->actions->contains($action)) {
-            $this->actions->removeElement($action);
+        if (method_exists($object, 'getCurrency') && $this->getDiscount()->getCurrency() !== $object->getCurrency()) {
+            return false;
         }
+
+        $matches = true;
+
+        foreach ($this->conditions as $condition) {
+            $matches &= $condition->matches($object);
+        }
+
+        return $matches;
     }
 }

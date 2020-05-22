@@ -17,8 +17,8 @@ class DateRangeConditionType extends AbstractNodeType
     protected function configureChildOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'label_format' => 'form.conditions.date_range.%name%.label',
-            'prototype_button_label' => 'form.conditions.date_range.prototype_button',
+            'label_format' => 'admin_discount_rule.form.conditions.date_range.%name%.label',
+            'prototype_button_label' => 'admin_discount_rule.form.conditions.date_range.prototype_button',
             'prototype_button_attr' => [ 'class' => 'dropdown-item btn btn-light' ],
         ]);
     }

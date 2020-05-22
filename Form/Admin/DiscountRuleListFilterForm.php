@@ -39,7 +39,7 @@ class DiscountRuleListFilterForm extends EntityListFilterForm implements Discoun
     public function getOrder(Request $request): array
     {
         if (class_exists(RequestParam::class)) {
-            $order = RequestParam::getQueryValidParam($request, self::getOrderFieldParamName(), 'date', ['id','date']);
+            $order = RequestParam::getQueryValidParam($request, self::getOrderFieldParamName(), 'name', ['id','name']);
             $sort = RequestParam::getQueryValidParam($request, self::getOrderDirectionParamName(), 'desc', ['asc','desc']);
 
             return [$order => $sort];

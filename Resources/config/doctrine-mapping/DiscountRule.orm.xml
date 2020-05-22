@@ -9,6 +9,10 @@
         <field name="active" column="active" type="boolean" nullable="true"><options><option name="default">1</option></options></field>
         <field name="priority" column="priority" type="smallint" nullable="true" />
         <field name="stopApply" column="stop_apply" type="boolean" nullable="true"><options><option name="default">0</option></options></field>
+
+        <many-to-one field="discount" target-entity="Softspring\PaymentBundle\Model\DiscountInterface" inversed-by="rules">
+            <join-column name="discount_id" referenced-column-name="id" on-delete="SET NULL" />
+        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

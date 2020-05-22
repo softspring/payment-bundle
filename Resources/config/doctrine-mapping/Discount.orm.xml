@@ -6,6 +6,7 @@
 
     <mapped-superclass name="Softspring\PaymentBundle\Model\Discount" table="discount">
         <field name="name" column="name" type="string" nullable="true" />
+        <field name="target" column="target" type="smallint" nullable="true"><options><option name="unsigned">true</option></options></field>
         <field name="type" column="type" type="smallint" nullable="true"><options><option name="unsigned">true</option></options></field>
         <field name="due" column="due" type="smallint" nullable="true"><options><option name="unsigned">true</option></options></field>
         <field name="currency" column="currency" type="string" nullable="true" length="3"><options><option name="fixed">true</option></options></field>

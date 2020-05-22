@@ -1,13 +1,13 @@
 {% trans_default_domain 'sfs_payment' %}
 
 {% for discount in entities %}
-    <tr>
+    <tr {% if read_route %}data-href="{{ url(read_route, {'discount':discount}) }}"{% endif %}>
         <td>{{ discount.name|default('') }}</td>
-        <td>{{ discount.type }}</td>
-        <td>{{ discount.due }}</td>
+        <td>{{ discount.target ? ('discount.target.'~discount.target)|trans : '' }}</td>
+        <td>{{ discount.due ? ('discount.due.'~discount.due)|trans : '' }}</td>
 
         <td>
-            {{ discount.value|number_format(2) }}
+            -{{ discount.value|number_format(2) }}
             {% if discount.type == constant('Softspring\\PaymentBundle\\Model\\DiscountInterface::TYPE_FIXED_AMOUNT') %}
                 <small>{{ discount.currency }}</small>
             {% else %}
@@ -15,12 +15,16 @@
             {% endif %}
         </td>
 
-        {% if read_route %}
-            <td>
-                <a href="{{ url(read_route, {'discount':discount}) }}" class="text-nowrap">
+        <td>
+            {{ discount.activeRules.count }}
+        </td>
+
+{#        {% if read_route %}#}
+{#            <td>#}
+{#                <a href="{{ url(read_route, {'discount':discount}) }}" class="text-nowrap">#}
 {#                    {{ 'admin_discount.list.actions.details.button'|trans }} <span class="mdi mdi-18px mdi-eye-outline align-middle"></span>#}
-                </a>
-            </td>
-        {% endif %}
+{#                </a>#}
+{#            </td>#}
+{#        {% endif %}#}
     </tr>
 {% endfor %}

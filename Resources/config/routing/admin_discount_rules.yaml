@@ -9,3 +9,7 @@ sfs_payment_admin_discount_rules_create:
 sfs_payment_admin_discount_rules_read:
     controller: sfs_payment.admin.discount_rule.controller::read
     path: /{discount_rule}
+
+sfs_payment_admin_discount_rules_update:
+    controller: sfs_payment.admin.discount_rule.controller::update
+    path: /{discount_rule}/update

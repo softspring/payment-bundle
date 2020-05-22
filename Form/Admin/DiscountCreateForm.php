@@ -51,19 +51,31 @@ class DiscountCreateForm extends AbstractType implements DiscountCreateFormInter
     {
         $builder->add('name');
 
-        $builder->add('type', ChoiceType::class, [
+        $builder->add('target', ChoiceType::class, [
+            'choice_translation_domain' => 'sfs_payment',
             'choices' => [
-                'TYPE_PERCENTAGE' => DiscountInterface::TYPE_PERCENTAGE,
-                'TYPE_FIXED_AMOUNT' => DiscountInterface::TYPE_FIXED_AMOUNT,
+                'discount.target_string.invoice' => DiscountInterface::TARGET_INVOICE,
+                'discount.target_string.shopping_cart' => DiscountInterface::TARGET_SHOPPING_CART,
+                'discount.target_string.shopping_salable' => DiscountInterface::TARGET_SHOPPING_SALABLE,
+                'discount.target_string.subscription' => DiscountInterface::TARGET_SUBSCRIPTION,
+            ],
+        ]);
+
+        $builder->add('type', ChoiceType::class, [
+            'choice_translation_domain' => 'sfs_payment',
+            'choices' => [
+                'discount.type_string.percentage' => DiscountInterface::TYPE_PERCENTAGE,
+                'discount.type_string.fixed_amount' => DiscountInterface::TYPE_FIXED_AMOUNT,
             ],
         ]);
 
         $builder->add('due', ChoiceType::class, [
+            'choice_translation_domain' => 'sfs_payment',
             'choices' => [
-                'DUE_NEVER' => DiscountInterface::DUE_NEVER,
-                'DUE_DATE' => DiscountInterface::DUE_DATE,
-                'DUE_AFTER_ONCE' => DiscountInterface::DUE_AFTER_ONCE,
-                'DUE_AFTER_REPEATS' => DiscountInterface::DUE_AFTER_REPEATS,
+                'discount.due_string.never' => DiscountInterface::DUE_NEVER,
+                'discount.due_string.date' => DiscountInterface::DUE_DATE,
+                'discount.due_string.after_once' => DiscountInterface::DUE_AFTER_ONCE,
+                'discount.due_string.after_repeats' => DiscountInterface::DUE_AFTER_REPEATS,
             ],
         ]);
 

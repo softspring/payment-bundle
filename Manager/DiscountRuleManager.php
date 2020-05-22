@@ -3,8 +3,11 @@
 namespace Softspring\PaymentBundle\Manager;
 
 use Softspring\CrudlBundle\Manager\DefaultCrudlEntityManager;
-use Softspring\PaymentBundle\Model\DiscountRuleActionInterface;
+use Softspring\PaymentBundle\Model\DiscountInterface;
 use Softspring\PaymentBundle\Model\DiscountRuleConditionInterface;
+use Softspring\PaymentBundle\Model\DiscountRuleInterface;
+use Softspring\ShopBundle\Model\OrderEntryHasDiscountsInterface;
+use Softspring\ShopBundle\Model\OrderEntryInterface;
 
 class DiscountRuleManager extends DefaultCrudlEntityManager implements DiscountRuleManagerInterface
 {
@@ -13,11 +16,6 @@ class DiscountRuleManager extends DefaultCrudlEntityManager implements DiscountR
      */
     protected $conditionMappings;
 
-    /**
-     * @var array
-     */
-    protected $actionMappings;
-
     public function createCondition(string $condition): DiscountRuleConditionInterface
     {
         $class = $this->conditionMappings[$condition]['entity'];
@@ -25,10 +23,28 @@ class DiscountRuleManager extends DefaultCrudlEntityManager implements DiscountR
         return new $class();
     }
 
-    public function createAction(string $action): DiscountRuleActionInterface
+    /**
+     * @param OrderEntryHasDiscountsInterface|OrderEntryInterface $entry
+     */
+    public function applyDiscountsToOrderEntry(OrderEntryHasDiscountsInterface $entry): void
     {
-        $class = $this->actionMappings[$action]['entity'];
+        $qb = $this->getRepository()->createQueryBuilder('r');
+        $qb->select('r');
+        $qb->leftJoin('r.discount', 'd');
+        $qb->andWhere('r.active = 1');
+        $qb->andWhere('d.target = '.DiscountInterface::TARGET_SHOPPING_SALABLE);
+        $qb->addOrderBy('r.priority', 'desc');
+        $rules = $qb->getQuery()->getResult();
 
-        return new $class();
+        /** @var DiscountRuleInterface $rule */
+        foreach ($rules as $rule) {
+            if ($rule->matches($entry)) {
+                $entry->addDiscountRule($rule);
+
+                if ($rule->isStopApply()) {
+                    return;
+                }
+            }
+        }
     }
 }

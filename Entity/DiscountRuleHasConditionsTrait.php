@@ -3,6 +3,7 @@
 namespace Softspring\PaymentBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Softspring\PaymentBundle\Model\DiscountRuleConditionInterface;
 
 trait DiscountRuleHasConditionsTrait

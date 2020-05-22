@@ -1,19 +1,57 @@
+{% set discountPage = app.request.attributes.get('_route') == 'sfs_payment_admin_discount_child_rules_read' %}
+{% set discount = discount_rule.discount %}
+
 {% trans_default_domain 'sfs_payment' %}
 {% extends '@SfsPayment/admin_layout.html.twig' %}
-{% block title %}{{ 'admin_discount_rule.read.page_title'|trans }}{% endblock %}
+{% block title %}{{ 'admin_discount_rule.read.page_title'|trans({'%name%':discount_rule.name}) }}{% endblock %}
+
+{% block breadcrums_content %}
+    {{ parent() }}
+
+    {% if discountPage %}
+        {% set discount = app.request.attributes.get('discount') %}
+        <li class="breadcrumb-item"><a href="{{ url('sfs_payment_admin_discounts_list') }}">{{ 'admin_discount.breadcrumb'|trans }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ url('sfs_payment_admin_discounts_read', {'discount':discount}) }}">{{ discount.name }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ 'admin_discount_rule.read.breadcrumb'|trans }}</li>
+    {% else %}
+        <li class="breadcrumb-item"><a href="{{ url('sfs_payment_admin_discount_rules_list') }}">{{ 'admin_discount_rule.breadcrumb'|trans }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ 'admin_discount_rule.read.breadcrumb'|trans }}</li>
+    {% endif %}
+{% endblock breadcrums_content %}
 
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">Payment</h1>
+        <h3 class="h4">Rule {{ discount_rule.name }}</h3>
+
+{#        {% if is_granted('ROLE_PAYMENT_ADMIN_DISCOUNT_RULE_UPDATE') %}#}
+            {% if discountPage %}
+                <a href="{{ url('sfs_payment_admin_discount_child_rules_update', {'discount':discount, 'discount_rule': discount_rule}) }}" class="btn btn-secondary">Edit rule</a>
+            {% else %}
+                <a href="{{ url('sfs_payment_admin_discount_rules_update', {'discount_rule': discount_rule}) }}" class="btn btn-secondary">Edit rule</a>
+            {% endif %}
+{#        {% endif %}#}
     </div>
 
-    <ul>
-{#        <li><strong>Platform:</strong> {{ discount_rule.platform }}</li>#}
-{#        <li><strong>Platform ID:</strong> {{ discount_rule.platformId }}</li>#}
-        <li><strong>Customer:</strong> {{ discount_rule.customer.name }}</li>
-{#        <li><strong>Source:</strong> {{ discount_rule.source.platformId }}</li>#}
-        <li><strong>Status:</strong> {{ discount_rule.statusString }}</li>
-        <li><strong>Date:</strong> {{ discount_rule.date|date('H:i:s d-m-Y') }}</li>
-        <li><strong>Discount:</strong> {{ discount_rule.discount_rule }}</li>
-    </ul>
+    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':discount_rule.conditions} %}
+        {% trans_default_domain 'sfs_payment' %}
+        {% block ths %}
+            <th scope="col">Condition</th>
+        {% endblock ths %}
+
+        {% block tbody %}
+            {% for condition in discount_rule.conditions %}
+                <tr>
+                    <td>{{ condition.conditionString }}</td>
+                </tr>
+            {% endfor %}
+        {% endblock tbody %}
+
+        {% block empty %}
+            <div class="p-5 m-5">
+                <p class="text-center text-muted">
+                    This discount has not any conditions, applies always
+                </p>
+            </div>
+        {% endblock empty %}
+    {% endembed %}
 {% endblock content %}

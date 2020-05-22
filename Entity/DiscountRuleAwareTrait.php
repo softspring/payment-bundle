@@ -2,6 +2,7 @@
 
 namespace Softspring\PaymentBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Softspring\PaymentBundle\Model\DiscountRuleAwareTrait as DiscountRuleAwareTraitModel;
 use Softspring\PaymentBundle\Model\DiscountRuleInterface;
 

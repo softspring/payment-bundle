@@ -6,7 +6,7 @@
 
 {% block breadcrums_content %}
     {{ parent() }}
-    <li class="breadcrumb-item active" aria-current="page">Discounts</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ 'admin_discount.breadcrumb'|trans }}</li>
 {% endblock breadcrums_content %}
 
 {% block content %}
@@ -23,16 +23,17 @@
     {{ form_rest(filterForm) }}
     {{ form_end(filterForm) }}
 
-    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities} %}
+    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'classes' : 'row-link table-striped table-hover' } %}
         {% trans_default_domain 'sfs_payment' %}
         {% block ths %}
             <th scope="col">{{ 'admin_discount.list.fields.name.header'|trans }}</th>
-            <th scope="col">{{ 'admin_discount.list.fields.type.header'|trans }}</th>
+            <th scope="col">{{ 'admin_discount.list.fields.target.header'|trans }}</th>
             <th scope="col">{{ 'admin_discount.list.fields.due.header'|trans }}</th>
             <th scope="col">{{ 'admin_discount.list.fields.value.header'|trans }}</th>
-            {% if read_route %}
-                <th>&nbsp;</th>
-            {% endif %}
+            <th scope="col">{{ 'admin_discount.list.fields.activeRules.header'|trans }}</th>
+{#            {% if read_route %}#}
+{#                <th>&nbsp;</th>#}
+{#            {% endif %}#}
         {% endblock ths %}
 
         {% block tbody %}

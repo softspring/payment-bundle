@@ -50,5 +50,33 @@ trait DateRangeConditionTrait
         $this->toDate = $toDate ? $toDate->format('U') : null;
     }
 
+    public function matches($object): bool
+    {
+        if ($this->getFromDate() && $this->getFromDate()->format('Ymd') < date('Ymd')) {
+            return false;
+        }
 
+        if ($this->getToDate() && $this->getToDate()->format('Ymd') > date('Ymd')) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function conditionString(): string
+    {
+        if ($this->getFromDate() && $this->getToDate()) {
+            return sprintf('from %s to %s', $this->getFromDate()->format('d-m-Y'), $this->getToDate()->format('d-m-Y'));
+        }
+
+        if ($this->getFromDate()) {
+            return sprintf('since %s', $this->getFromDate()->format('d-m-Y'));
+        }
+
+        if ($this->getToDate()) {
+            return sprintf('until %s', $this->getToDate()->format('d-m-Y'));
+        }
+
+        return 'forever';
+    }
 }
