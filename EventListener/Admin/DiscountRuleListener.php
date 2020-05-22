@@ -42,6 +42,7 @@ class DiscountRuleListener implements EventSubscriberInterface
             SfsPaymentEvents::ADMIN_DISCOUNT_RULES_READ_INITIALIZE => 'onDiscountRuleInitialize',
             SfsPaymentEvents::ADMIN_DISCOUNT_RULES_UPDATE_INITIALIZE => 'onDiscountRuleInitialize',
             SfsPaymentEvents::ADMIN_DISCOUNT_RULES_CREATE_SUCCESS => 'onDiscountRuleCreateSuccess',
+            SfsPaymentEvents::ADMIN_DISCOUNT_RULES_UPDATE_SUCCESS => 'onDiscountRuleUpdateSuccess',
         ];
     }
 
@@ -68,6 +69,21 @@ class DiscountRuleListener implements EventSubscriberInterface
     public function onDiscountRuleCreateSuccess(GetResponseEntityEvent $event)
     {
         if ($event->getRequest()->attributes->get('_route') == 'sfs_payment_admin_discount_child_rules_create') {
+            /** @var DiscountRuleInterface $rule */
+            $rule = $event->getEntity();
+
+            $response = new RedirectResponse($this->router->generate('sfs_payment_admin_discounts_read', ['discount' => $rule->getDiscount()]));
+            $event->setResponse($response);
+            return;
+        }
+
+        $response = new RedirectResponse($this->router->generate('sfs_payment_admin_discount_rules_list'));
+        $event->setResponse($response);
+    }
+
+    public function onDiscountRuleUpdateSuccess(GetResponseEntityEvent $event)
+    {
+        if ($event->getRequest()->attributes->get('_route') == 'sfs_payment_admin_discount_child_rules_update') {
             /** @var DiscountRuleInterface $rule */
             $rule = $event->getEntity();
 

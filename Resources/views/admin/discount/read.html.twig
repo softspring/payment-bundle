@@ -38,6 +38,7 @@
         {% trans_default_domain 'sfs_payment' %}
         {% block ths %}
             <th scope="col">Rule</th>
+            <th scope="col">Condition</th>
             <th scope="col">Active</th>
             <th scope="col">Priority</th>
         {% endblock ths %}
@@ -46,6 +47,12 @@
             {% for rule in discount.rules %}
                 <tr data-href="{{ url('sfs_payment_admin_discount_child_rules_read', {'discount': discount, 'discount_rule': rule}) }}">
                     <td>{{ rule.name|default('') }}</td>
+                    <td>
+                        {% for condition in rule.conditions %}
+                            {{ condition.conditionString|lower }}
+                            {% if not loop.last %}AND{% endif %}
+                        {% endfor %}
+                    </td>
                     <td>{{ rule.active ? 'yes' : 'no' }}</td>
                     <td>{{ rule.priority }}</td>
                 </tr>
