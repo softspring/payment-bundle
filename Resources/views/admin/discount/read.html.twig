@@ -13,7 +13,7 @@
         <h1 class="h3">{{ discount.name }}</h1>
     </div>
 
-    <ul>
+    <ul class="list-unstyled bg-gray-200 w-auto py-3 px-4">
         <li><strong>Target:</strong> {{ discount.target ? ('discount.target.'~discount.target)|trans : '' }}</li>
         <li><strong>Due:</strong> {{ discount.due ? ('discount.due.'~discount.due)|trans : '' }}</li>
         <li><strong>Value:</strong>
@@ -27,10 +27,10 @@
     </ul>
 
     <div class="d-flex align-items-center justify-content-between mt-5 mb-3">
-        <h3 class="h4">Rules</h3>
+        <h2 class="h4">Rules</h2>
 
         {% if is_granted('ROLE_PAYMENT_ADMIN_DISCOUNT_RULE_CREATE') %}
-            <a href="{{ url('sfs_payment_admin_discount_child_rules_create', {'discount':discount}) }}" class="btn btn-secondary">Create rule</a>
+            <a href="{{ url('sfs_payment_admin_discount_child_rules_create', {'discount':discount}) }}" class="btn btn-primary">Create rule</a>
         {% endif %}
     </div>
 
@@ -41,6 +41,7 @@
             <th scope="col">Condition</th>
             <th scope="col">Active</th>
             <th scope="col">Priority</th>
+            <th></th>
         {% endblock ths %}
 
         {% block tbody %}
@@ -55,6 +56,11 @@
                     </td>
                     <td>{{ rule.active ? 'yes' : 'no' }}</td>
                     <td>{{ rule.priority }}</td>
+                    <td align="right" class="actions">
+                        <a href="{{ url('sfs_payment_admin_discount_child_rules_read', {'discount': discount, 'discount_rule': rule}) }}" class="text-nowrap">
+                            details <span class="mdi mdi-18px mdi-eye-outline align-middle"></span>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         {% endblock tbody %}

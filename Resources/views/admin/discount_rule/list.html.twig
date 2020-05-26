@@ -14,7 +14,7 @@
         <h1 class="h3">Discounts</h1>
 
         {% if is_granted('ROLE_PAYMENT_ADMIN_DISCOUNT_CREATE') %}
-            <a href="{{ url('sfs_payment_admin_discount_rules_create') }}" class="btn btn-secondary">Create discount_rule</a>
+            <a href="{{ url('sfs_payment_admin_discount_rules_create') }}" class="btn btn-primary">Create discount_rule</a>
         {% endif %}
     </div>
 

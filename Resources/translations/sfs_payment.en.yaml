@@ -135,6 +135,9 @@ admin_discount:
             due.header: "Dues"
             value.header: "Value"
             activeRules.header: "Active rules"
+        actions:
+            details:
+                button: "Details"
 
     create:
         meta.title: "New discount"

@@ -11,8 +11,10 @@
 
         <td>{{ invoice.total|number_format(2) }} <small>{{ invoice.currency }}</small></td>
 
-{#        {% if read_route %}#}
-{#            <td><a href="{{ url(read_route, {'invoice':invoice}) }}" class="text-nowrap">{{ 'admin_invoice.list.actions.details.button'|trans }}   <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a></td>#}
-{#        {% endif %}#}
+        {% if read_route %}
+            <td align="right" class="actions">
+                <a href="{{ url(read_route, {'invoice':invoice}) }}" class="text-nowrap">{{ 'admin_invoice.list.actions.details.button'|trans }}   <span class="mdi mdi-18px mdi-eye-outline align-middle"></span></a>
+            </td>
+        {% endif %}
     </tr>
 {% endfor %}

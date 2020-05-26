@@ -14,7 +14,7 @@
         <h1 class="h3">Discounts</h1>
 
         {% if is_granted('ROLE_PAYMENT_ADMIN_DISCOUNT_CREATE') %}
-            <a href="{{ url('sfs_payment_admin_discounts_create') }}" class="btn btn-secondary">Create discount</a>
+            <a href="{{ url('sfs_payment_admin_discounts_create') }}" class="btn btn-primary">Create discount</a>
         {% endif %}
     </div>
 
@@ -31,9 +31,9 @@
             <th scope="col">{{ 'admin_discount.list.fields.due.header'|trans }}</th>
             <th scope="col">{{ 'admin_discount.list.fields.value.header'|trans }}</th>
             <th scope="col">{{ 'admin_discount.list.fields.activeRules.header'|trans }}</th>
-{#            {% if read_route %}#}
-{#                <th>&nbsp;</th>#}
-{#            {% endif %}#}
+            {% if read_route %}
+                <th>&nbsp;</th>
+            {% endif %}
         {% endblock ths %}
 
         {% block tbody %}

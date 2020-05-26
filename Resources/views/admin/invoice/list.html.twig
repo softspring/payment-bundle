@@ -14,7 +14,7 @@
         <h1 class="h3">Invoices</h1>
 
         {% if is_granted('ROLE_PAYMENT_ADMIN_INVOICE_CREATE') %}
-            <a href="{{ url('sfs_payment_admin_invoices_create') }}" class="btn btn-secondary">Create invoice</a>
+            <a href="{{ url('sfs_payment_admin_invoices_create') }}" class="btn btn-primary">Create invoice</a>
         {% endif %}
     </div>
 
