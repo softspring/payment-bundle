@@ -23,7 +23,7 @@
     {{ form_rest(filterForm) }}
     {{ form_end(filterForm) }}
 
-    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'classes' : 'row-link table-striped table-hover' } %}
+    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':entities, 'classes' : 'row-link table-striped table-hover border-bottom-0' } %}
         {% trans_default_domain 'sfs_payment' %}
         {% block ths %}
             <th scope="col">{{ 'admin_discount.list.fields.name.header'|trans }}</th>
