@@ -17,19 +17,19 @@
 {% block date_range_condition_row %}
     <div class="node-row mt-2 mb-2" {{ block('widget_container_attributes') }}>
         <div class="row">
-            <div class="col-sm-1">{{ form.vars.name }}</div>
+            <div class="col-sm-1"><span class="order-polymorphic-node">{{ form.vars.name }}</span></div>
             <div class="col-sm-10">{{ form_widget(form) }}{{ form_errors(form) }}</div>
-            <div class="col-sm-1"><a class="btn btn-light remove_polymorphic_node" href="#">X</a></div>
+            <div class="col-sm-1"><button type="button" class="btn btn-light remove_polymorphic_node">x</button></div>
         </div>
     </div>
 {% endblock date_range_condition_row %}
 
 {% block date_range_condition_widget %}
     <div class="row {{ not form.parent.vars.valid ? 'show-invalid' }}">
-        <div class="col-sm-2">{{ form_label(form.fromDate) }}</div>
-        <div class="col-sm-4">{{ form_widget(form.fromDate) }}{{ form_errors(form.fromDate) }}</div>
-        <div class="col-sm-2">{{ form_label(form.toDate) }}</div>
-        <div class="col-sm-4">{{ form_widget(form.toDate) }}{{ form_errors(form.toDate) }}</div>
+        <div class="col-sm-3">{{ form_label(form.fromDate) }}</div>
+        <div class="col-sm-3">{{ form_widget(form.fromDate) }}{{ form_errors(form.fromDate) }}</div>
+        <div class="col-sm-3">{{ form_label(form.toDate) }}</div>
+        <div class="col-sm-3">{{ form_widget(form.toDate) }}{{ form_errors(form.toDate) }}</div>
         {{ form_rest(form) }}
     </div>
 {% endblock date_range_condition_widget %}
@@ -37,17 +37,17 @@
 {% block store_condition_row %}
     <div class="node-row mt-2 mb-2" {{ block('widget_container_attributes') }}>
         <div class="row">
-            <div class="col-sm-1">{{ form.vars.name }}</div>
+            <div class="col-sm-1"><span class="order-polymorphic-node">{{ form.vars.name }}</span></div>
             <div class="col-sm-10">{{ form_widget(form) }}{{ form_errors(form) }}</div>
-            <div class="col-sm-1"><a class="btn btn-light remove_polymorphic_node" href="#">X</a></div>
+            <div class="col-sm-1"><button type="button" class="btn btn-light remove_polymorphic_node">x</button></div>
         </div>
     </div>
 {% endblock store_condition_row %}
 
 {% block store_condition_widget %}
     <div class="row {{ not form.parent.vars.valid ? 'show-invalid' }}">
-        <div class="col-sm-2">{{ form_label(form.store) }}</div>
-        <div class="col-sm-4">{{ form_widget(form.store) }}</div>
+        <div class="col-sm-3">{{ form_label(form.store) }}</div>
+        <div class="col-sm-3">{{ form_widget(form.store) }}</div>
         {{ form_rest(form) }}
     </div>
 {% endblock store_condition_widget %}
@@ -55,17 +55,17 @@
 {% block salable_item_condition_row %}
     <div class="node-row mt-2 mb-2" {{ block('widget_container_attributes') }}>
         <div class="row">
-            <div class="col-sm-1">{{ form.vars.name }}</div>
+            <div class="col-sm-1"><span class="order-polymorphic-node">{{ form.vars.name }}</span></div>
             <div class="col-sm-10">{{ form_widget(form) }}{{ form_errors(form) }}</div>
-            <div class="col-sm-1"><a class="btn btn-light remove_polymorphic_node" href="#">X</a></div>
+            <div class="col-sm-1"><button type="button" class="btn btn-light remove_polymorphic_node">x</button></div>
         </div>
     </div>
 {% endblock salable_item_condition_row %}
 
 {% block salable_item_condition_widget %}
     <div class="row {{ not form.parent.vars.valid ? 'show-invalid' }}">
-        <div class="col-sm-2">{{ form_label(form.salableItem) }}</div>
-        <div class="col-sm-4">{{ form_widget(form.salableItem) }}</div>
+        <div class="col-sm-3">{{ form_label(form.salableItem) }}</div>
+        <div class="col-sm-3">{{ form_widget(form.salableItem) }}</div>
         {{ form_rest(form) }}
     </div>
 {% endblock salable_item_condition_widget %}
