@@ -8,4 +8,4 @@ sfs_payment_admin_invoices_create:
 
 sfs_payment_admin_invoices_read:
     controller: sfs_payment.admin.invoice.controller::read
-    path: /{payment}
+    path: /{invoice}
