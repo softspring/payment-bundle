@@ -81,6 +81,8 @@ admin_invoice:
             status.header: "Status"
             customer.header: "Customer"
             amount.header: "Import"
+        actions:
+            details.button: "Details"
 
     create:
         meta.title: "New invoice"
