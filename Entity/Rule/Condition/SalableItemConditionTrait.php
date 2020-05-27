@@ -3,6 +3,7 @@
 namespace Softspring\PaymentBundle\Entity\Rule\Condition;
 
 use Doctrine\ORM\Mapping as ORM;
+use Softspring\ShopBundle\Model\OrderEntryInterface;
 use Softspring\ShopBundle\Model\SalableItemInterface;
 
 trait SalableItemConditionTrait
@@ -33,6 +34,10 @@ trait SalableItemConditionTrait
     {
         if ($object instanceof SalableItemInterface) {
             return $object === $this->getSalableItem();
+        }
+
+        if ($object instanceof OrderEntryInterface && $object->getItem() instanceof SalableItemInterface) {
+            return $object->getItem() === $this->getSalableItem();
         }
 
         return false;
