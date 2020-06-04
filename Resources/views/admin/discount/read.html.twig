@@ -34,7 +34,7 @@
         {% endif %}
     </div>
 
-    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':discount.rules, 'classes': 'row-link table-striped table-hover'} %}
+    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':discount.rules, 'classes': 'row-link table-striped table-hover', 'pagination_route': false} %}
         {% trans_default_domain 'sfs_payment' %}
         {% block ths %}
             <th scope="col">Rule</th>

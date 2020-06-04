@@ -32,7 +32,7 @@
 {#        {% endif %}#}
     </div>
 
-    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':discount_rule.conditions} %}
+    {% embed '@SfsAdmin/components/table.html.twig' with {'collection':discount_rule.conditions, 'pagination_route': false} %}
         {% trans_default_domain 'sfs_payment' %}
         {% block ths %}
             <th scope="col">Condition</th>
