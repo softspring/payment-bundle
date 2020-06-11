@@ -4,16 +4,15 @@
 
 {% block content %}
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3">Payment</h1>
+        <h1 class="h3">Invoice</h1>
     </div>
 
     <ul>
 {#        <li><strong>Platform:</strong> {{ invoice.platform }}</li>#}
-{#        <li><strong>Platform ID:</strong> {{ invoice.platformId }}</li>#}
+        <li><strong>Platform ID:</strong> {{ invoice.platformId }}</li>
         <li><strong>Customer:</strong> {{ invoice.customer.name }}</li>
 {#        <li><strong>Source:</strong> {{ invoice.source.platformId }}</li>#}
         <li><strong>Status:</strong> {{ invoice.statusString }}</li>
         <li><strong>Date:</strong> {{ invoice.date|date('H:i:s d-m-Y') }}</li>
-        <li><strong>Concept:</strong> {{ invoice.concept }}</li>
     </ul>
 {% endblock content %}
