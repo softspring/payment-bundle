@@ -40,6 +40,16 @@ interface InvoiceInterface
     public function setStatus(?int $status): void;
 
     /**
+     * @return string|null
+     */
+    public function getNumber(): ?string;
+
+    /**
+     * @param string|null $number
+     */
+    public function setNumber(?string $number): void;
+
+    /**
      * @return \DateTime|null
      */
     public function getDate(): ?\DateTime;

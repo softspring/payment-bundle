@@ -15,6 +15,8 @@
             </options>
         </field>
 
+        <field name="number" column="invoice_number" type="string" length="30" nullable="true" />
+
         <!--one-to-many field="concepts" target-entity="Softspring\PaymentBundle\Model\Concept" mapped-by="invoice" /-->
         <!--one-to-many field="payments" target-entity="Softspring\PaymentBundle\Model\Payment" /-->
 

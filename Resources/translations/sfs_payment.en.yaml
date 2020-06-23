@@ -77,6 +77,7 @@ admin_invoice:
     list:
         page_title: "Invoices"
         fields:
+            number.header: "Number"
             date.header: "Date"
             status.header: "Status"
             customer.header: "Customer"

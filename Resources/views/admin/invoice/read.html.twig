@@ -14,5 +14,6 @@
 {#        <li><strong>Source:</strong> {{ invoice.source.platformId }}</li>#}
         <li><strong>Status:</strong> {{ invoice.statusString }}</li>
         <li><strong>Date:</strong> {{ invoice.date|date('H:i:s d-m-Y') }}</li>
+        <li><strong>Number:</strong> {{ invoice.number }}</li>
     </ul>
 {% endblock content %}

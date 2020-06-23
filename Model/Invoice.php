@@ -19,6 +19,11 @@ abstract class Invoice implements InvoiceInterface
     protected $status;
 
     /**
+     * @var string|null
+     */
+    protected $number;
+
+    /**
      * @var int|null
      */
     protected $date;
@@ -114,6 +119,22 @@ abstract class Invoice implements InvoiceInterface
         }
 
         return null;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNumber(): ?string
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param string|null $number
+     */
+    public function setNumber(?string $number): void
+    {
+        $this->number = $number;
     }
 
     /**

@@ -3,6 +3,7 @@
 {% for invoice in entities %}
     <tr>
         <td>{{ invoice.date ? invoice.date|date('d-m-Y') : '' }}</td>
+        <td>{{ invoice.number }}</td>
         <td class="{{ {35:'text-muted', 15:'text-success', 21:'text-warning'}[invoice.status] | default('') }}">
             {{ invoice.statusString }}
         </td>
