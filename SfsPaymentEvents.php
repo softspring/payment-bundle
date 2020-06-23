@@ -258,4 +258,9 @@ class SfsPaymentEvents
      * @Event("Softspring\CoreBundle\Event\ViewEvent")
      */
     const ADMIN_DISCOUNT_RULES_UPDATE_VIEW = 'sfs_payment.admin.discount_rules.update_view';
+
+    /**
+     * @Event("Softspring\PaymentBundle\Event\InvoiceEvent")
+     */
+    const INVOICE_SYNC = 'sfs_payment.invoice.sync';
 }

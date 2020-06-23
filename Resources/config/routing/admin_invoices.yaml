@@ -9,3 +9,7 @@ sfs_payment_admin_invoices_create:
 sfs_payment_admin_invoices_read:
     controller: sfs_payment.admin.invoice.controller::read
     path: /{invoice}
+
+sfs_payment_admin_invoices_sync:
+    controller: Softspring\PaymentBundle\Controller\Admin\InvoiceController::sync
+    path: /{invoice}/sync

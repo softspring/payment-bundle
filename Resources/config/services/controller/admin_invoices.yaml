@@ -13,6 +13,8 @@ services:
     Softspring\PaymentBundle\EventListener\Admin\InvoiceListener:
         tags: ['kernel.event_subscriber']
 
+    Softspring\PaymentBundle\Controller\Admin\InvoiceController: ~
+
     sfs_payment.admin.invoice.controller:
         class: Softspring\CrudlBundle\Controller\CrudlController
         public: true

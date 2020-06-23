@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\PaymentBundle\Request\ParamConverter\:
+        resource: '../../../Request/ParamConverter/*'
+        tags: ['request.param_converter']

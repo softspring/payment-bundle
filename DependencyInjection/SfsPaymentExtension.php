@@ -34,6 +34,7 @@ class SfsPaymentExtension extends Extension implements PrependExtensionInterface
         // load services
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
 
+        $loader->load('param_converters.yaml');
         $loader->load('controller/admin_payments.yaml');
         $loader->load('controller/admin_concepts.yaml');
         $loader->load('controller/admin_invoices.yaml');
