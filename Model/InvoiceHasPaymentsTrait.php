@@ -23,7 +23,10 @@ trait InvoiceHasPaymentsTrait
     {
         if (!$this->payments->contains($payment)) {
             $this->payments->add($payment);
-            // $payment->setInvoice($this);
+
+            if ($payment instanceof PaymentRefersInvoiceInterface) {
+                $payment->setInvoice($this);
+            }
         }
     }
 

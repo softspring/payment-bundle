@@ -261,6 +261,10 @@ abstract class Invoice implements InvoiceInterface
     {
         if (!$this->payments->contains($payment)) {
             $this->payments->add($payment);
+
+            if ($payment instanceof PaymentRefersInvoiceInterface) {
+                $payment->setInvoice($this);
+            }
         }
     }
 
