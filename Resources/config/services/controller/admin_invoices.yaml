@@ -1,3 +1,9 @@
+parameters:
+    sfs_payment.admin.invoices.list_view: '@@SfsPayment/admin/invoice/list.html.twig'
+    sfs_payment.admin.invoices.list_page_view: '@@SfsPayment/admin/invoice/list-page.html.twig'
+    sfs_payment.admin.invoices.read_view: '@@SfsPayment/admin/invoice/read.html.twig'
+    sfs_payment.admin.invoices.create_view: '@@SfsPayment/admin/invoice/create.html.twig'
+
 services:
     _defaults:
         autowire: true
@@ -32,14 +38,14 @@ services:
                     is_granted: 'ROLE_PAYMENT_ADMIN_INVOICE_LIST'
                     filter_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_LIST_FILTER
                     view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_LIST_VIEW
-                    view: '@@SfsPayment/admin/invoice/list.html.twig'
-                    view_page: '@@SfsPayment/admin/invoice/list-page.html.twig'
+                    view: '%sfs_payment.admin.invoices.list_view%'
+                    view_page: '%sfs_payment.admin.invoices.list_page_view%'
                     read_route: 'sfs_payment_admin_invoices_read'
                 read:
                     is_granted: 'ROLE_PAYMENT_ADMIN_INVOICE_DETAILS'
                     param_converter_key: 'id'
                     view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_READ_VIEW
-                    view: '@@SfsPayment/admin/invoice/read.html.twig'
+                    view: '%sfs_payment.admin.invoices.read_view%'
                 create:
                     is_granted: 'ROLE_PAYMENT_ADMIN_INVOICE_CREATE'
                     param_converter_key: 'id'
@@ -48,4 +54,4 @@ services:
                     success_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_CREATE_SUCCESS
                     form_invalid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_CREATE_FORM_INVALID
                     view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_INVOICES_CREATE_VIEW
-                    view: '@@SfsPayment/admin/invoice/create.html.twig'
+                    view: '%sfs_payment.admin.invoices.create_view%'

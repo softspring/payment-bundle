@@ -1,3 +1,9 @@
+parameters:
+    sfs_payment.admin.concepts.list_view: '@@SfsPayment/admin/concept/list.html.twig'
+    sfs_payment.admin.concepts.list_page_view: '@@SfsPayment/admin/concept/list-page.html.twig'
+    sfs_payment.admin.concepts.read_view: '@@SfsPayment/admin/concept/read.html.twig'
+    sfs_payment.admin.concepts.create_view: '@@SfsPayment/admin/concept/create.html.twig'
+
 services:
     _defaults:
         autowire: true
@@ -30,14 +36,14 @@ services:
                     is_granted: 'ROLE_PAYMENT_ADMIN_CONCEPT_LIST'
                     filter_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_LIST_FILTER
                     view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_LIST_VIEW
-                    view: '@@SfsPayment/admin/concept/list.html.twig'
-                    view_page: '@@SfsPayment/admin/concept/list-page.html.twig'
+                    view: '%sfs_payment.admin.concepts.list_view%'
+                    view_page: '%sfs_payment.admin.concepts.list_page_view%'
                     read_route: 'sfs_payment_admin_concepts_read'
                 read:
                     is_granted: 'ROLE_PAYMENT_ADMIN_CONCEPT_DETAILS'
                     param_converter_key: 'id'
                     view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_READ_VIEW
-                    view: '@@SfsPayment/admin/concept/read.html.twig'
+                    view: '%sfs_payment.admin.concepts.read_view%'
                 create:
                     is_granted: 'ROLE_PAYMENT_ADMIN_CONCEPT_CREATE'
                     param_converter_key: 'id'
@@ -46,4 +52,4 @@ services:
                     success_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_CREATE_SUCCESS
                     form_invalid_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_CREATE_FORM_INVALID
                     view_event_name: !php/const Softspring\PaymentBundle\SfsPaymentEvents::ADMIN_CONCEPTS_CREATE_VIEW
-                    view: '@@SfsPayment/admin/concept/create.html.twig'
+                    view: '%sfs_payment.admin.concepts.create_view%'
